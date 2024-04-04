@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v6.js"></script>
+
+    <!-- Create an element where the map will take place -->
+    <svg id="my_dataviz" width="800" height="500"></svg> <br>
+
+</head>
+<body>
+    <input id="userInput"> <br> <br>
+    <button onclick="calculateNeighbors()">Calculate</button>
+
+    <style>
+        body {background-color: darkslategray; text-align: center; color: brown;}
+    </style>
+
+    <script>
+        // The svg
+        const svg = d3.select("svg"),
+            width = +svg.attr("width"),
+            height = +svg.attr("height");
+                
+        // Map and projection
+        const projection = d3.geoMercator()
+            .center([2, 47])
+            .scale(width / 1.5 / Math.PI)
+            .translate([width / 2, height / 2])
+
+        function calculateNeighbors() {
+
+            d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson").then(function(data) {
+                let arr = data["features"];
+                var country = null;
+                for(let i = 0; i < arr.length; i++) {
+                    let countryName = arr[i]["properties"]["name"];
+                    country = data.features.find(d => d.properties.name === countryName);
+                    svg.append("g")
+                    .selectAll("path")
+                    .data([country])
+                    .join("path")
+                    .attr("fill", "#69b3a2")
+                    .attr("id", countryName)
+                    .attr("d", d3.geoPath()
+                        .projection(projection))
+                    .style("stroke", "#fff");
+
+                    let a = document.querySelector('svg');
+                    console.log(a);
+                    let bs = a.querySelectorAll('path');
+                    bs.forEach((b, d) => {
+                        console.log(b);
+                    });
+                }
+                
+                let stateInfo = [];
+                let map = document.querySelector('svg');
+                let states = map.querySelectorAll('path');
+                let checks = 0;
+
+                /**
+                * collect data in info array
+                * find neighbors by pointInStroke checks
+                */
+                let checksPerPath = 12;
+
+                states.forEach((state, s) => {
+                    console.log(state);
+                    let id = state.id;
+                    if (!stateInfo[s]) {
+                        let bb = state.getBBox();
+                        stateInfo.push({
+                            id: id,
+                            neighbors: [],
+                            bb: [bb.x, bb.y, bb.x + bb.width, bb.y + bb.height],
+                            pathLength: state.getTotalLength()
+                        });
+                    }
+                    let [x, y, right, bottom] = stateInfo[s].bb;
+                    let pathLength = stateInfo[s].pathLength;
+
+                    for (let i = 0; i < states.length; i++) {
+                        let state1 = states[i];
+                        let id = state1.id;
+                        if (!stateInfo[i]) {
+                            let bb = state1.getBBox();
+                            stateInfo.push({
+                                id: id,
+                                neighbors: [],
+                                bb: [bb.x, bb.y, bb.x + bb.width, bb.y + bb.height],
+                                pathLength: state1.getTotalLength()
+                            });
+                        }
+
+                        let [x1, y1, right1, bottom1] = stateInfo[i].bb;
+                        let pathLength1 = stateInfo[i].pathLength;
+
+                        /**
+                        * narrow down selection by checking  bbox intersections
+                        */
+                        if (
+                            s != i &&
+                            x <= right1 &&
+                            right >= x1 &&
+                            y <= bottom1 &&
+                            bottom >= y1) {
+
+                            /**
+                            * refine by point in fill checks
+                            * skip previously compared paths 
+                            * (e.g already processed A-B combination makes comparing B-A obsolete) 
+                            */
+                            if (!stateInfo[s].neighbors.includes(state1.id) && !stateInfo[i].neighbors.includes(state.id)) {
+                                let inStroke = false;
+                                let inStroke1 = false;
+                                for (let c = 0; c < checksPerPath && !inStroke && !inStroke1; c++) {
+                                    let pt = state.getPointAtLength(pathLength / checksPerPath * c);
+                                    inStroke = state1.isPointInStroke(pt)
+                                    // check path 1 against path 2
+                                    if (inStroke) {
+                                        stateInfo[s].neighbors.push(state1.id);
+                                        stateInfo[i].neighbors.push(state.id);
+                                    }else{
+                                    // no intersections found: reverse order
+                                        let pt1 = state1.getPointAtLength(pathLength1 / checksPerPath * c);
+                                        inStroke1 = state.isPointInStroke(pt1)
+                                        if (inStroke1) {
+                                            stateInfo[s].neighbors.push(state1.id);
+                                            stateInfo[i].neighbors.push(state.id);
+                                        }
+                                    }
+                                    // just for benchmarking
+                                    checks++
+                                }
+                            }
+                        }
+                    }
+                    let title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    let neighborsAtt = stateInfo[s].neighbors.join(', ');
+                    title.textContent = 'neighbor states: ' + neighborsAtt;
+                    state.appendChild(title);
+                    state.dataset.neighbors = neighborsAtt;
+                });
+
+                console.log('total checks:', checks, stateInfo);
+            })
+        }
+    </script>
+</body>
+</html>

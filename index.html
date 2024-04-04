@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>travle unlimited</title>
+
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v6.js"></script>
+</head>
+<body>
+    
+    <!-- Create an element where the map will take place -->
+    <svg id="map" width="600" height="400"></svg> <br>
+
+    <input id="userInput"> <br> <br>
+    <button onclick="addCountry()">Submit</button>
+    <button onclick="restart()">Restart</button>
+
+    <style>
+        body {background-color: darkslategray; text-align: center; color: brown;}
+    </style>
+
+    <script>
+        var paths = [];
+        // The svg
+        const svg = d3.select("svg"),
+            width = +svg.attr("width"),
+            height = +svg.attr("height");
+                
+        // Map and projection
+        const projection = d3.geoMercator()
+            .center([2, 47])
+            .scale(width / 1.5 / Math.PI)
+            .translate([width / 2, height / 2]);
+        
+        var currentDisplay = []; // List of displayed countries
+        var paths = []; // List of shortest paths between start and end countries
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            var endpoints = await randomCountry();
+            console.log(endpoints); 
+            paths = await findShortestPaths(endpoints[0], endpoints[1]);
+            while(paths.length === 0 || paths[0].length <= 3) {
+                endpoints = await randomCountry();
+                console.log(endpoints);
+                paths = await findShortestPaths(endpoints[0], endpoints[1]);
+            }
+            console.log(paths);
+            currentDisplay.push(endpoints[0]);
+            currentDisplay.push(endpoints[1]);
+            display(endpoints[0]);
+            display(endpoints[1]);
+        })
+
+        async function addCountry() {
+            
+            var countryID = document.querySelector("#userInput");
+            if(!currentDisplay.includes(countryID)) {
+                currentDisplay.push(countryID.value);
+            }
+            display(countryID.value);
+            
+            const checkWin = (displayedCountry) => currentDisplay.includes(displayedCountry);
+
+            for(let i = 0; i < paths.length; i++) {
+                if(paths[i].every(checkWin)) {
+                    console.log("You win!");
+                }
+            }
+        }
+
+        async function randomCountry() {
+            try {
+                var start = Math.floor(Math.random()*177);
+                var end = Math.floor(Math.random()*177);
+                while(start === end) end = Math.floor(Math.random()*177);
+                const response = await fetch('./neighbors.json');
+                if(!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                const startCountry = data.features[start].id;
+                //console.log(startCountry);
+                const endCountry = data.features[end].id;
+                //console.log(endCountry);
+                return [startCountry, endCountry];
+            } catch(error) {
+                console.log("Error generating random countries: ", error);
+                throw error;
+            }
+        }
+        
+        function display(countryName) {
+            d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson").then(function(data) {
+                var newCountry = data.features.find(d => d.properties.name === countryName)
+                
+                svg.append("g")
+                    .selectAll("path")
+                    .data([newCountry])
+                    .join("path")
+                    .attr("fill", "#69b3a2")
+                    .attr("d", d3.geoPath()
+                        .projection(projection))
+                    .style("stroke", "#fff");
+            })
+        }
+
+        async function getNeighbors(countryID) {
+            try {
+                const response = await fetch('./neighbors.json');
+                if(!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                const country = data.features.find(feature => feature.id === countryID);
+                if(!country) {
+                    throw new Error('Country not found');
+                }
+                return country.neighbors;
+            } catch(error) {
+                console.error('Error fetching country neighbors:', error);
+                throw error; // Re-throw the error for the caller to handle
+            }
+        }
+
+        async function findShortestPaths(start, end) {
+            var shortestPaths = [];
+            const queue = [[start]];
+
+            var shortPathFound = false; // Set true when first path to target is found to stop enqueuing
+            while(queue.length > 0) {
+                const path = queue.shift();
+                //console.log(path);
+                if(path.length > 6) return shortestPaths;
+                const currentCountry = path[path.length - 1];
+                if(currentCountry === end) {
+                    if(shortPathFound && path.length > shortestPaths[0].length) {
+                        break;
+                    }
+                    shortestPaths.push(path);
+                    shortPathFound = true;
+                }
+
+                if(!shortPathFound) {
+                    for(const neighbor of await getNeighbors(currentCountry)) {
+                        queue.push(path.concat(neighbor));
+                    }
+                }
+            }
+            return shortestPaths;
+        }
+
+        async function restart() {
+            currentDisplay = [];
+            path = [];
+            var endpoints = await randomCountry();
+            console.log(endpoints); 
+            paths = await findShortestPaths(endpoints[0], endpoints[1]);
+            while(paths.length === 0) {
+                endpoints = await randomCountry();
+                console.log(endpoints);
+                paths = await findShortestPaths(endpoints[0], endpoints[1]);
+            }
+            console.log(paths);
+            currentDisplay.push(endpoints[0]);
+            currentDisplay.push(endpoints[1]);
+        }
+        
+    </script>
+</body>
+</html>

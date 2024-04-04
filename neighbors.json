@@ -1,0 +1,2738 @@
+{
+    "type": "FeatureCollection",
+                                                                                    
+    "features": [
+    {
+        "id": "Afghanistan",
+        "neighbors": [
+            "Iran",
+            "Pakistan",
+            "Tajikistan",
+            "Turkmenistan",
+            "Uzbekistan"
+        ],
+        "bb": [
+            573.4175415039062,
+            284.4347229003906,
+            616.7645263671875,
+            317.22906494140625
+        ],
+        "pathLength": 147.2467498779297
+    },
+    {
+        "id": "Angola",
+        "neighbors": [
+            "Democratic Republic of the Congo",
+            "Republic of the Congo",
+            "Namibia",
+            "Zambia"
+        ],
+        "bb": [
+            428.563232421875,
+            421.3215637207031,
+            465.42193603515625,
+            462.1755676269531
+        ],
+        "pathLength": 164.57530212402344
+    },
+    {
+        "id": "Albania",
+        "neighbors": [
+            "Greece",
+            "Kosovo",
+            "Macedonia",
+            "Montenegro"
+        ],
+        "bb": [
+            451.2725524902344,
+            268.0310974121094,
+            456.3556823730469,
+            280.0896301269531
+        ],
+        "pathLength": 29.447736740112305
+    },
+    {
+        "id": "United Arab Emirates",
+        "neighbors": [
+            "Oman",
+            "Saudi Arabia"
+        ],
+        "bb": [
+            546.9022827148438,
+            328.1500244140625,
+            561.1758422851562,
+            339.71917724609375
+        ],
+        "pathLength": 44.96194839477539
+    },
+    {
+        "id": "Argentina",
+        "neighbors": [
+            "Bolivia",
+            "Brazil",
+            "Chile",
+            "Paraguay",
+            "Uruguay"
+        ],
+        "bb": [
+            176.54685974121094,
+            474.4717712402344,
+            235.17526245117188,
+            605.4031372070312
+        ],
+        "pathLength": 391.89093017578125
+    },
+    {
+        "id": "Armenia",
+        "neighbors": [
+            "Azerbaijan",
+            "Georgia",
+            "Iran",
+            "Turkey"
+        ],
+        "bb": [
+            523.2081298828125,
+            273.7704772949219,
+            531.8687744140625,
+            283.4680480957031
+        ],
+        "pathLength": 32.03254318237305
+    },
+    {
+        "id": "Antarctica",
+        "neighbors": [],
+        "bb": [
+            -139.25926208496094,
+            652.1524658203125,
+            927.4073638916016,
+            941.4920043945312
+        ],
+        "pathLength": 3980.59326171875
+    },
+    {
+        "id": "French Southern and Antarctic Lands",
+        "neighbors": [],
+        "bb": [
+            597.6889038085938,
+            573.4878540039062,
+            603.1407470703125,
+            578.702880859375
+        ],
+        "pathLength": 18.183122634887695
+    },
+    {
+        "id": "Australia",
+        "neighbors": [],
+        "bb": [
+            729.8931884765625,
+            439.9523620605469,
+            849.0947265625,
+            552.1304931640625
+        ],
+        "pathLength": 513.5327758789062
+    },
+    {
+        "id": "Austria",
+        "neighbors": [
+            "Switzerland",
+            "Czech Republic",
+            "Germany",
+            "Hungary",
+            "Italy",
+            "Slovakia",
+            "Slovenia"
+        ],
+        "bb": [
+            422.1628723144531,
+            240.9657440185547,
+            444.3841857910156,
+            252.4554901123047
+        ],
+        "pathLength": 65.2234878540039
+    },
+    {
+        "id": "Azerbaijan",
+        "neighbors": [
+            "Armenia",
+            "Georgia",
+            "Iran",
+            "Russia"
+        ],
+        "bb": [
+            526.7969970703125,
+            271.3450927734375,
+            543.3861083984375,
+            285.2507629394531
+        ],
+        "pathLength": 74.80503845214844
+    },
+    {
+        "id": "Burundi",
+        "neighbors": [
+            "Democratic Republic of the Congo",
+            "Rwanda",
+            "United Republic of Tanzania"
+        ],
+        "bb": [
+            480.0738525390625,
+            415.1191101074219,
+            485.19189453125,
+            421.5057067871094
+        ],
+        "pathLength": 19.162893295288086
+    },
+    {
+        "id": "Belgium",
+        "neighbors": [
+            "Germany",
+            "France",
+            "Luxembourg",
+            "Netherlands"
+        ],
+        "bb": [
+            401.5216979980469,
+            229.67332458496094,
+            412.3160095214844,
+            238.73812866210938
+        ],
+        "pathLength": 32.290565490722656
+    },
+    {
+        "id": "Benin",
+        "neighbors": [
+            "Burkina Faso",
+            "Niger",
+            "Nigeria",
+            "Togo"
+        ],
+        "bb": [
+            396.36248779296875,
+            371.626220703125,
+            405.32476806640625,
+            389.92474365234375
+        ],
+        "pathLength": 46.08268737792969
+    },
+    {
+        "id": "Burkina Faso",
+        "neighbors": [
+            "Benin",
+            "Ivory Coast",
+            "Ghana",
+            "Mali",
+            "Niger",
+            "Togo"
+        ],
+        "bb": [
+            377.864990234375,
+            362.8412780761719,
+            400.5247497558594,
+            379.54766845703125
+        ],
+        "pathLength": 68.28142547607422
+    },
+    {
+        "id": "Bangladesh",
+        "neighbors": [
+            "India",
+            "Myanmar"
+        ],
+        "bb": [
+            655.06494140625,
+            326.8580627441406,
+            668.659912109375,
+            345.5380554199219
+        ],
+        "pathLength": 72.7755355834961
+    },
+    {
+        "id": "Bulgaria",
+        "neighbors": [
+            "Greece",
+            "Macedonia",
+            "Romania",
+            "Republic of Serbia",
+            "Turkey"
+        ],
+        "bb": [
+            460.3867492675781,
+            261.7168273925781,
+            478.69061279296875,
+            273.82421875
+        ],
+        "pathLength": 59.35126876831055
+    },
+    {
+        "id": "The Bahamas",
+        "neighbors": [],
+        "bb": [
+            160.05926513671875,
+            324.88897705078125,
+            165.92591857910156,
+            335.8114318847656
+        ],
+        "pathLength": 30.672893524169922
+    },
+    {
+        "id": "Bosnia and Herzegovina",
+        "neighbors": [
+            "Croatia",
+            "Montenegro",
+            "Republic of Serbia"
+        ],
+        "bb": [
+            440.7408142089844,
+            257.55047607421875,
+            452.1474304199219,
+            268.18524169921875
+        ],
+        "pathLength": 36.67567825317383
+    },
+    {
+        "id": "Belarus",
+        "neighbors": [
+            "Lithuania",
+            "Latvia",
+            "Poland",
+            "Russia",
+            "Ukraine"
+        ],
+        "bb": [
+            462.8133239746094,
+            206.08010864257812,
+            490.9441223144531,
+            230.41188049316406
+        ],
+        "pathLength": 95.7900619506836
+    },
+    {
+        "id": "Belize",
+        "neighbors": [
+            "Guatemala",
+            "Mexico"
+        ],
+        "bb": [
+            129.69149780273438,
+            352.3658752441406,
+            133.016845703125,
+            360.47125244140625
+        ],
+        "pathLength": 20.781503677368164
+    },
+    {
+        "id": "Bolivia",
+        "neighbors": [
+            "Argentina",
+            "Brazil",
+            "Chile",
+            "Peru",
+            "Paraguay"
+        ],
+        "bb": [
+            187.88021850585938,
+            437.22406005859375,
+            223.70852661132812,
+            477.80560302734375
+        ],
+        "pathLength": 146.23631286621094
+    },
+    {
+        "id": "Brazil",
+        "neighbors": [
+            "Argentina",
+            "Bolivia",
+            "Colombia",
+            "France",
+            "Guyana",
+            "Peru",
+            "Paraguay",
+            "Suriname",
+            "Uruguay",
+            "Venezuela"
+        ],
+        "bb": [
+            174.85263061523438,
+            392.5977478027344,
+            291.1703796386719,
+            514.5656127929688
+        ],
+        "pathLength": 480.1175231933594
+    },
+    {
+        "id": "Brunei",
+        "neighbors": [
+            "Malaysia"
+        ],
+        "bb": [
+            732.4563598632812,
+            391.9928894042969,
+            736.1502685546875,
+            396.2745056152344
+        ],
+        "pathLength": 12.650543212890625
+    },
+    {
+        "id": "Bhutan",
+        "neighbors": [
+            "China",
+            "India"
+        ],
+        "bb": [
+            657.2274169921875,
+            320.6854248046875,
+            666.9739379882812,
+            325.9539794921875
+        ],
+        "pathLength": 24.55864143371582
+    },
+    {
+        "id": "Botswana",
+        "neighbors": [
+            "Namibia",
+            "South Africa",
+            "Zimbabwe"
+        ],
+        "bb": [
+            453.0235900878906,
+            461.3390197753906,
+            481.2805480957031,
+            490.7256164550781
+        ],
+        "pathLength": 98.80253601074219
+    },
+    {
+        "id": "Central African Republic",
+        "neighbors": [
+            "Cameroon",
+            "Democratic Republic of the Congo",
+            "Republic of the Congo",
+            "Sudan",
+            "South Sudan",
+            "Chad"
+        ],
+        "bb": [
+            436.916748046875,
+            374.9341125488281,
+            475.1828918457031,
+            401.4380187988281
+        ],
+        "pathLength": 111.66397857666016
+    },
+    {
+        "id": "Canada",
+        "neighbors": [
+            "USA"
+        ],
+        "bb": [
+            -23.697126388549805,
+            -71.96949005126953,
+            238.07969856262207,
+            272.08226776123047
+        ],
+        "pathLength": 3811.356689453125
+    },
+    {
+        "id": "Switzerland",
+        "neighbors": [
+            "Austria",
+            "Germany",
+            "France",
+            "Italy"
+        ],
+        "bb": [
+            411.9188537597656,
+            246.36195373535156,
+            425.0154113769531,
+            255.2540740966797
+        ],
+        "pathLength": 39.53031921386719
+    },
+    {
+        "id": "Chile",
+        "neighbors": [
+            "Argentina",
+            "Bolivia",
+            "Peru"
+        ],
+        "bb": [
+            169.94253540039062,
+            461.084716796875,
+            195.67431640625,
+            607.2926025390625
+        ],
+        "pathLength": 413.0321044921875
+    },
+    {
+        "id": "China",
+        "neighbors": [
+            "Bhutan",
+            "India",
+            "Kazakhstan",
+            "Kyrgyzstan",
+            "Laos",
+            "Myanmar",
+            "Mongolia",
+            "Nepal",
+            "Pakistan",
+            "North Korea",
+            "Russia",
+            "Tajikistan",
+            "Vietnam"
+        ],
+        "bb": [
+            612.3715209960938,
+            220.02301025390625,
+            794.1520385742188,
+            353.30950927734375
+        ],
+        "pathLength": 727.4026489257812
+    },
+    {
+        "id": "Ivory Coast",
+        "neighbors": [
+            "Burkina Faso",
+            "Ghana",
+            "Guinea",
+            "Liberia",
+            "Mali"
+        ],
+        "bb": [
+            368.58404541015625,
+            376.7994689941406,
+            386.4823913574219,
+            395.2922058105469
+        ],
+        "pathLength": 69.62179565429688
+    },
+    {
+        "id": "Cameroon",
+        "neighbors": [
+            "Central African Republic",
+            "Republic of the Congo",
+            "Gabon",
+            "Equatorial Guinea",
+            "Niger",
+            "Nigeria",
+            "Chad"
+        ],
+        "bb": [
+            419.22613525390625,
+            369.7328186035156,
+            441.5195617675781,
+            403.03887939453125
+        ],
+        "pathLength": 106.8331069946289
+    },
+    {
+        "id": "Democratic Republic of the Congo",
+        "neighbors": [
+            "Angola",
+            "Burundi",
+            "Central African Republic",
+            "Republic of the Congo",
+            "Rwanda",
+            "South Sudan",
+            "United Republic of Tanzania",
+            "Uganda",
+            "Zambia"
+        ],
+        "bb": [
+            430.1698913574219,
+            392.5632019042969,
+            486.4419250488281,
+            447.7946472167969
+        ],
+        "pathLength": 223.84056091308594
+    },
+    {
+        "id": "Republic of the Congo",
+        "neighbors": [
+            "Angola",
+            "Central African Republic",
+            "Cameroon",
+            "Democratic Republic of the Congo",
+            "Gabon"
+        ],
+        "bb": [
+            426.94451904296875,
+            397.1043701171875,
+            448.74981689453125,
+            423.1053466796875
+        ],
+        "pathLength": 95.93069458007812
+    },
+    {
+        "id": "Colombia",
+        "neighbors": [
+            "Brazil",
+            "Ecuador",
+            "Panama",
+            "Peru",
+            "Venezuela"
+        ],
+        "bb": [
+            160.02685546875,
+            371.0145568847656,
+            195.9219970703125,
+            420.9060363769531
+        ],
+        "pathLength": 177.3528594970703
+    },
+    {
+        "id": "Costa Rica",
+        "neighbors": [
+            "Nicaragua",
+            "Panama"
+        ],
+        "bb": [
+            139.4319305419922,
+            374.7084045410156,
+            149.4927520751953,
+            383.7041015625
+        ],
+        "pathLength": 35.647743225097656
+    },
+    {
+        "id": "Cuba",
+        "neighbors": [],
+        "bb": [
+            142.2965545654297,
+            337.4953918457031,
+            174.28733825683594,
+            348.11346435546875
+        ],
+        "pathLength": 80.30413055419922
+    },
+    {
+        "id": "Northern Cyprus",
+        "neighbors": [
+            "Cyprus"
+        ],
+        "bb": [
+            491.05712890625,
+            294.8904113769531,
+            496.52288818359375,
+            297.3284606933594
+        ],
+        "pathLength": 13.791654586791992
+    },
+    {
+        "id": "Cyprus",
+        "neighbors": [
+            "Northern Cyprus"
+        ],
+        "bb": [
+            489.6493835449219,
+            296.7028503417969,
+            494.82928466796875,
+            298.8742980957031
+        ],
+        "pathLength": 12.547037124633789
+    },
+    {
+        "id": "Czech Republic",
+        "neighbors": [
+            "Austria",
+            "Germany",
+            "Poland",
+            "Slovakia"
+        ],
+        "bb": [
+            430.341064453125,
+            231.36856079101562,
+            449.93524169921875,
+            243.1417694091797
+        ],
+        "pathLength": 54.9031867980957
+    },
+    {
+        "id": "Germany",
+        "neighbors": [
+            "Austria",
+            "Belgium",
+            "Switzerland",
+            "Czech Republic",
+            "Denmark",
+            "France",
+            "Luxembourg",
+            "Netherlands",
+            "Poland"
+        ],
+        "bb": [
+            411.8182373046875,
+            212.29701232910156,
+            438.5688781738281,
+            248.68209838867188
+        ],
+        "pathLength": 127.55905151367188
+    },
+    {
+        "id": "Djibouti",
+        "neighbors": [
+            "Eritrea",
+            "Ethiopia",
+            "Somaliland"
+        ],
+        "bb": [
+            517.5162963867188,
+            370.21820068359375,
+            522.4232788085938,
+            375.5846862792969
+        ],
+        "pathLength": 18.67035484313965
+    },
+    {
+        "id": "Denmark",
+        "neighbors": [
+            "Germany",
+            "Sweden"
+        ],
+        "bb": [
+            418.04437255859375,
+            197.5985107421875,
+            431.6741027832031,
+            213.24026489257812
+        ],
+        "pathLength": 60.54853057861328
+    },
+    {
+        "id": "Dominican Republic",
+        "neighbors": [
+            "Haiti"
+        ],
+        "bb": [
+            180.9033660888672,
+            348.020751953125,
+            191.65054321289062,
+            355.1750183105469
+        ],
+        "pathLength": 32.3170051574707
+    },
+    {
+        "id": "Algeria",
+        "neighbors": [
+            "Libya",
+            "Morocco",
+            "Mali",
+            "Mauritania",
+            "Niger",
+            "Tunisia"
+        ],
+        "bb": [
+            368.342529296875,
+            289.5645751953125,
+            429.628173828125,
+            350.62152099609375
+        ],
+        "pathLength": 206.74237060546875
+    },
+    {
+        "id": "Ecuador",
+        "neighbors": [
+            "Colombia",
+            "Peru"
+        ],
+        "bb": [
+            154.16958618164062,
+            404.0666809082031,
+            171.15933227539062,
+            422.87078857421875
+        ],
+        "pathLength": 62.537803649902344
+    },
+    {
+        "id": "Egypt",
+        "neighbors": [
+            "Israel",
+            "Jordan",
+            "Libya",
+            "Saudi Arabia",
+            "Sudan"
+        ],
+        "bb": [
+            467.25946044921875,
+            309.4359436035156,
+            503.3073425292969,
+            341.31005859375
+        ],
+        "pathLength": 150.4522705078125
+    },
+    {
+        "id": "Eritrea",
+        "neighbors": [
+            "Djibouti",
+            "Ethiopia",
+            "Sudan"
+        ],
+        "bb": [
+            501.6983337402344,
+            353.9310607910156,
+            521.72216796875,
+            370.9595947265625
+        ],
+        "pathLength": 60.89606857299805
+    },
+    {
+        "id": "Spain",
+        "neighbors": [
+            "France",
+            "Portugal"
+        ],
+        "bb": [
+            366.2433166503906,
+            263.7207946777344,
+            403.0799560546875,
+            293.8847351074219
+        ],
+        "pathLength": 125.22331237792969
+    },
+    {
+        "id": "Estonia",
+        "neighbors": [
+            "Latvia",
+            "Russia"
+        ],
+        "bb": [
+            463.2290344238281,
+            186.87620544433594,
+            477.42724609375,
+            199.01138305664062
+        ],
+        "pathLength": 47.442298889160156
+    },
+    {
+        "id": "Ethiopia",
+        "neighbors": [
+            "Djibouti",
+            "Eritrea",
+            "Kenya",
+            "Sudan",
+            "South Sudan",
+            "Somaliland",
+            "Somalia"
+        ],
+        "bb": [
+            491.7160949707031,
+            363.3221130371094,
+            535.67236328125,
+            398.0132141113281
+        ],
+        "pathLength": 131.4750518798828
+    },
+    {
+        "id": "Finland",
+        "neighbors": [
+            "Norway",
+            "Russia",
+            "Sweden"
+        ],
+        "bb": [
+            455.2462158203125,
+            112.1174087524414,
+            487.455078125,
+            185.49325561523438
+        ],
+        "pathLength": 205.5670928955078
+    },
+    {
+        "id": "Fiji",
+        "neighbors": [],
+        "bb": [
+            -139.25926208496094,
+            456.2589111328125,
+            927.4073638916016,
+            463.2895812988281
+        ],
+        "pathLength": 27.148967742919922
+    },
+    {
+        "id": "Falkland Islands",
+        "neighbors": [],
+        "bb": [
+            212.74073791503906,
+            584.8673095703125,
+            222.9629669189453,
+            590.6046142578125
+        ],
+        "pathLength": 27.383277893066406
+    },
+    {
+        "id": "France",
+        "neighbors": [
+            "Belgium",
+            "Brazil",
+            "Switzerland",
+            "Germany",
+            "Spain",
+            "Italy",
+            "Luxembourg",
+            "Suriname"
+        ],
+        "bb": [
+            232.5192413330078,
+            231.2210693359375,
+            422.4000549316406,
+            402.0732727050781
+        ],
+        "pathLength": 192.70230102539062
+    },
+    {
+        "id": "Gabon",
+        "neighbors": [
+            "Cameroon",
+            "Republic of the Congo",
+            "Equatorial Guinea"
+        ],
+        "bb": [
+            420.1422119140625,
+            401.2626953125,
+            436.816162109375,
+            419.9573059082031
+        ],
+        "pathLength": 64.55744934082031
+    },
+    {
+        "id": "England",
+        "neighbors": [
+            "Ireland"
+        ],
+        "bb": [
+            371.6380310058594,
+            192.5121612548828,
+            399.056396484375,
+            236.76409912109375
+        ],
+        "pathLength": 175.8186798095703
+    },
+    {
+        "id": "Georgia",
+        "neighbors": [
+            "Armenia",
+            "Azerbaijan",
+            "Russia",
+            "Turkey"
+        ],
+        "bb": [
+            512.4592895507812,
+            264.520263671875,
+            532.260498046875,
+            274.4933166503906
+        ],
+        "pathLength": 51.95553970336914
+    },
+    {
+        "id": "Ghana",
+        "neighbors": [
+            "Burkina Faso",
+            "Ivory Coast",
+            "Togo"
+        ],
+        "bb": [
+            384.46112060546875,
+            375.067138671875,
+            397.2151794433594,
+            394.18603515625
+        ],
+        "pathLength": 56.486820220947266
+    },
+    {
+        "id": "Guinea",
+        "neighbors": [
+            "Ivory Coast",
+            "Guinea Bissau",
+            "Liberia",
+            "Mali",
+            "Senegal",
+            "Sierra Leone"
+        ],
+        "bb": [
+            349.2435302734375,
+            370.5627136230469,
+            370.86785888671875,
+            386.44329833984375
+        ],
+        "pathLength": 73.92559814453125
+    },
+    {
+        "id": "Gambia",
+        "neighbors": [
+            "Senegal"
+        ],
+        "bb": [
+            344.1732482910156,
+            366.6352233886719,
+            353.0519714355469,
+            368.9090881347656
+        ],
+        "pathLength": 20.564388275146484
+    },
+    {
+        "id": "Guinea Bissau",
+        "neighbors": [
+            "Guinea",
+            "Senegal"
+        ],
+        "bb": [
+            344.6593933105469,
+            370.43524169921875,
+            353.4800720214844,
+            375.2420349121094
+        ],
+        "pathLength": 23.186752319335938
+    },
+    {
+        "id": "Equatorial Guinea",
+        "neighbors": [
+            "Cameroon",
+            "Gabon"
+        ],
+        "bb": [
+            421.6462707519531,
+            401.389892578125,
+            427.5113525390625,
+            405.16558837890625
+        ],
+        "pathLength": 17.907594680786133
+    },
+    {
+        "id": "Greece",
+        "neighbors": [
+            "Albania",
+            "Bulgaria",
+            "Macedonia"
+        ],
+        "bb": [
+            453.77783203125,
+            271.4794006347656,
+            472.9013366699219,
+            297.6189880371094
+        ],
+        "pathLength": 105.93167114257812
+    },
+    {
+        "id": "Greenland",
+        "neighbors": [],
+        "bb": [
+            176.8977813720703,
+            -82.65423583984375,
+            357.9006042480469,
+            184.36700439453125
+        ],
+        "pathLength": 1034.0487060546875
+    },
+    {
+        "id": "Guatemala",
+        "neighbors": [
+            "Belize",
+            "Honduras",
+            "Mexico",
+            "El Salvador"
+        ],
+        "bb": [
+            120.8022232055664,
+            354.4883728027344,
+            132.66659545898438,
+            367.0658874511719
+        ],
+        "pathLength": 48.42584991455078
+    },
+    {
+        "id": "Guyana",
+        "neighbors": [
+            "Brazil",
+            "Suriname",
+            "Venezuela"
+        ],
+        "bb": [
+            212.11761474609375,
+            383.2789001464844,
+            226.5499725341797,
+            404.4010925292969
+        ],
+        "pathLength": 64.50088500976562
+    },
+    {
+        "id": "Honduras",
+        "neighbors": [
+            "Guatemala",
+            "Nicaragua",
+            "El Salvador"
+        ],
+        "bb": [
+            129.32347106933594,
+            360.1061706542969,
+            147.71194458007812,
+            369.3519287109375
+        ],
+        "pathLength": 48.51382827758789
+    },
+    {
+        "id": "Croatia",
+        "neighbors": [
+            "Bosnia and Herzegovina",
+            "Hungary",
+            "Italy",
+            "Montenegro",
+            "Republic of Serbia",
+            "Slovenia"
+        ],
+        "bb": [
+            434.5391845703125,
+            252.1460418701172,
+            451.52734375,
+            268.8691711425781
+        ],
+        "pathLength": 74.24581909179688
+    },
+    {
+        "id": "Haiti",
+        "neighbors": [
+            "Dominican Republic"
+        ],
+        "bb": [
+            173.45767211914062,
+            347.9237976074219,
+            181.85223388671875,
+            353.8292236328125
+        ],
+        "pathLength": 32.448062896728516
+    },
+    {
+        "id": "Hungary",
+        "neighbors": [
+            "Austria",
+            "Croatia",
+            "Romania",
+            "Republic of Serbia",
+            "Slovakia",
+            "Slovenia",
+            "Ukraine"
+        ],
+        "bb": [
+            442.08087158203125,
+            242.83470153808594,
+            461.3645324707031,
+            255.32826232910156
+        ],
+        "pathLength": 54.10478973388672
+    },
+    {
+        "id": "Indonesia",
+        "neighbors": [
+            "Malaysia",
+            "Papua New Guinea",
+            "East Timor"
+        ],
+        "bb": [
+            676.4237670898438,
+            391.8973693847656,
+            811.9521484375,
+            439.0235900878906
+        ],
+        "pathLength": 639.1317749023438
+    },
+    {
+        "id": "India",
+        "neighbors": [
+            "Bangladesh",
+            "Bhutan",
+            "China",
+            "Myanmar",
+            "Nepal",
+            "Pakistan"
+        ],
+        "bb": [
+            596.0789184570312,
+            295.5373840332031,
+            682.6742553710938,
+            384.480712890625
+        ],
+        "pathLength": 384.26751708984375
+    },
+    {
+        "id": "Ireland",
+        "neighbors": [
+            "England"
+        ],
+        "bb": [
+            364.5123291015625,
+            211.52870178222656,
+            376.1985778808594,
+            228.74716186523438
+        ],
+        "pathLength": 48.482051849365234
+    },
+    {
+        "id": "Iran",
+        "neighbors": [
+            "Afghanistan",
+            "Armenia",
+            "Azerbaijan",
+            "Iraq",
+            "Pakistan",
+            "Turkmenistan",
+            "Turkey"
+        ],
+        "bb": [
+            524.76806640625,
+            279.7508850097656,
+            581.6788940429688,
+            331.35986328125
+        ],
+        "pathLength": 206.58018493652344
+    },
+    {
+        "id": "Iraq",
+        "neighbors": [
+            "Iran",
+            "Jordan",
+            "Kuwait",
+            "Saudi Arabia",
+            "Syria",
+            "Turkey"
+        ],
+        "bb": [
+            509.01434326171875,
+            288.57110595703125,
+            537.9791870117188,
+            317.9743347167969
+        ],
+        "pathLength": 97.34874725341797
+    },
+    {
+        "id": "Iceland",
+        "neighbors": [],
+        "bb": [
+            321.9964904785156,
+            141.3914031982422,
+            353.7489318847656,
+            162.67205810546875
+        ],
+        "pathLength": 105.73084259033203
+    },
+    {
+        "id": "Israel",
+        "neighbors": [
+            "Egypt",
+            "Jordan",
+            "Lebanon",
+            "Syria",
+            "West Bank"
+        ],
+        "bb": [
+            495.6012878417969,
+            303.4967041015625,
+            500.2559814453125,
+            316.6074523925781
+        ],
+        "pathLength": 34.152374267578125
+    },
+    {
+        "id": "Italy",
+        "neighbors": [
+            "Austria",
+            "Switzerland",
+            "France",
+            "Croatia",
+            "Slovenia"
+        ],
+        "bb": [
+            414.0739440917969,
+            249.4981231689453,
+            448.8303527832031,
+            291.41046142578125
+        ],
+        "pathLength": 190.6962890625
+    },
+    {
+        "id": "Jamaica",
+        "neighbors": [],
+        "bb": [
+            161.96231079101562,
+            352.2901611328125,
+            168.29730224609375,
+            354.85614013671875
+        ],
+        "pathLength": 14.380082130432129
+    },
+    {
+        "id": "Jordan",
+        "neighbors": [
+            "Egypt",
+            "Iraq",
+            "Israel",
+            "Saudi Arabia",
+            "Syria",
+            "West Bank"
+        ],
+        "bb": [
+            497.5484619140625,
+            303.1376037597656,
+            510.20880126953125,
+            317.6402587890625
+        ],
+        "pathLength": 49.573246002197266
+    },
+    {
+        "id": "Japan",
+        "neighbors": [],
+        "bb": [
+            777.5065307617188,
+            256.2099914550781,
+            825.31298828125,
+            311.3644714355469
+        ],
+        "pathLength": 218.5020294189453
+    },
+    {
+        "id": "Kazakhstan",
+        "neighbors": [
+            "China",
+            "Kyrgyzstan",
+            "Russia",
+            "Turkmenistan",
+            "Uzbekistan"
+        ],
+        "bb": [
+            531.75244140625,
+            210.2100067138672,
+            652.91845703125,
+            276.06878662109375
+        ],
+        "pathLength": 417.8894958496094
+    },
+    {
+        "id": "Kenya",
+        "neighbors": [
+            "Ethiopia",
+            "South Sudan",
+            "Somalia",
+            "United Republic of Tanzania",
+            "Uganda"
+        ],
+        "bb": [
+            494.49945068359375,
+            391.8194580078125,
+            518.089111328125,
+            422.0312194824219
+        ],
+        "pathLength": 96.333251953125
+    },
+    {
+        "id": "Kyrgyzstan",
+        "neighbors": [
+            "China",
+            "Kazakhstan",
+            "Tajikistan",
+            "Uzbekistan"
+        ],
+        "bb": [
+            599.8959350585938,
+            265.5596618652344,
+            631.8814697265625,
+            281.4155578613281
+        ],
+        "pathLength": 98.33751678466797
+    },
+    {
+        "id": "Cambodia",
+        "neighbors": [
+            "Laos",
+            "Thailand",
+            "Vietnam"
+        ],
+        "bb": [
+            697.3276977539062,
+            364.51361083984375,
+            712.9320068359375,
+            376.9125061035156
+        ],
+        "pathLength": 49.144264221191406
+    },
+    {
+        "id": "South Korea",
+        "neighbors": [
+            "North Korea"
+        ],
+        "bb": [
+            767.7552490234375,
+            283.9574890136719,
+            777.683837890625,
+            299.52783203125
+        ],
+        "pathLength": 45.459434509277344
+    },
+    {
+        "id": "Kosovo",
+        "neighbors": [
+            "Albania",
+            "Macedonia",
+            "Montenegro",
+            "Republic of Serbia"
+        ],
+        "bb": [
+            453.5428161621094,
+            265.6666564941406,
+            458.5927429199219,
+            271.3990478515625
+        ],
+        "pathLength": 16.98500633239746
+    },
+    {
+        "id": "Kuwait",
+        "neighbors": [
+            "Iraq",
+            "Saudi Arabia"
+        ],
+        "bb": [
+            532.055419921875,
+            314.70343017578125,
+            537.5291748046875,
+            319.9118957519531
+        ],
+        "pathLength": 17.642608642578125
+    },
+    {
+        "id": "Laos",
+        "neighbors": [
+            "China",
+            "Cambodia",
+            "Myanmar",
+            "Thailand",
+            "Vietnam"
+        ],
+        "bb": [
+            690.7140502929688,
+            339.8224182128906,
+            712.7837524414062,
+            366.6211853027344
+        ],
+        "pathLength": 92.8690414428711
+    },
+    {
+        "id": "Lebanon",
+        "neighbors": [
+            "Israel",
+            "Syria"
+        ],
+        "bb": [
+            498.1512756347656,
+            298.611328125,
+            502.5533447265625,
+            304.16363525390625
+        ],
+        "pathLength": 15.62398624420166
+    },
+    {
+        "id": "Liberia",
+        "neighbors": [
+            "Ivory Coast",
+            "Guinea",
+            "Sierra Leone"
+        ],
+        "bb": [
+            360.181396484375,
+            382.75762939453125,
+            371.73419189453125,
+            395.24029541015625
+        ],
+        "pathLength": 40.22201919555664
+    },
+    {
+        "id": "Libya",
+        "neighbors": [
+            "Algeria",
+            "Egypt",
+            "Niger",
+            "Sudan",
+            "Chad",
+            "Tunisia"
+        ],
+        "bb": [
+            421.6871337890625,
+            303.9939880371094,
+            468.6365051269531,
+            348.9790954589844
+        ],
+        "pathLength": 176.02903747558594
+    },
+    {
+        "id": "Sri Lanka",
+        "neighbors": [],
+        "bb": [
+            630.2078857421875,
+            378.9066162109375,
+            636.4087524414062,
+            390.44256591796875
+        ],
+        "pathLength": 28.041061401367188
+    },
+    {
+        "id": "Lesotho",
+        "neighbors": [
+            "South Africa"
+        ],
+        "bb": [
+            474.0718994140625,
+            496.8152770996094,
+            480.96343994140625,
+            503.6261901855469
+        ],
+        "pathLength": 20.05185317993164
+    },
+    {
+        "id": "Lithuania",
+        "neighbors": [
+            "Belarus",
+            "Latvia",
+            "Poland",
+            "Russia"
+        ],
+        "bb": [
+            456.4616394042969,
+            204.99476623535156,
+            472.8541564941406,
+            217.78724670410156
+        ],
+        "pathLength": 48.51291275024414
+    },
+    {
+        "id": "Luxembourg",
+        "neighbors": [
+            "Belgium",
+            "Germany",
+            "France"
+        ],
+        "bb": [
+            410.8860778808594,
+            235.98873901367188,
+            412.57110595703125,
+            239.1341094970703
+        ],
+        "pathLength": 8.231599807739258
+    },
+    {
+        "id": "Latvia",
+        "neighbors": [
+            "Belarus",
+            "Estonia",
+            "Lithuania",
+            "Russia"
+        ],
+        "bb": [
+            456.4616394042969,
+            196.2613983154297,
+            477.56060791015625,
+            209.00758361816406
+        ],
+        "pathLength": 64.38282775878906
+    },
+    {
+        "id": "Morocco",
+        "neighbors": [
+            "Algeria",
+            "Mauritania",
+            "Western Sahara"
+        ],
+        "bb": [
+            343.6431884765625,
+            294.5678405761719,
+            390.7420654296875,
+            343.1574401855469
+        ],
+        "pathLength": 155.3273162841797
+    },
+    {
+        "id": "Moldova",
+        "neighbors": [
+            "Romania",
+            "Ukraine"
+        ],
+        "bb": [
+            472.9461975097656,
+            243.53619384765625,
+            483.0360412597656,
+            256.47723388671875
+        ],
+        "pathLength": 38.467140197753906
+    },
+    {
+        "id": "Madagascar",
+        "neighbors": [],
+        "bb": [
+            522.234619140625,
+            444.0999450683594,
+            543.6341552734375,
+            486.67279052734375
+        ],
+        "pathLength": 109.16665649414062
+    },
+    {
+        "id": "Mexico",
+        "neighbors": [
+            "Belize",
+            "Guatemala",
+            "USA"
+        ],
+        "bb": [
+            47.02885818481445,
+            305.4631042480469,
+            136.85339736938477,
+            364.6108093261719
+        ],
+        "pathLength": 354.2788391113281
+    },
+    {
+        "id": "Macedonia",
+        "neighbors": [
+            "Albania",
+            "Bulgaria",
+            "Greece",
+            "Kosovo",
+            "Republic of Serbia"
+        ],
+        "bb": [
+            454.70562744140625,
+            269.51007080078125,
+            462.08111572265625,
+            275.3631591796875
+        ],
+        "pathLength": 21.863750457763672
+    },
+    {
+        "id": "Mali",
+        "neighbors": [
+            "Burkina Faso",
+            "Ivory Coast",
+            "Algeria",
+            "Guinea",
+            "Mauritania",
+            "Niger",
+            "Senegal"
+        ],
+        "bb": [
+            358.0126037597656,
+            331.6988525390625,
+            406.7265625,
+            378.0875244140625
+        ],
+        "pathLength": 174.43081665039062
+    },
+    {
+        "id": "Myanmar",
+        "neighbors": [
+            "Bangladesh",
+            "China",
+            "India",
+            "Laos",
+            "Thailand"
+        ],
+        "bb": [
+            667.5651245117188,
+            320.5524597167969,
+            693.86669921875,
+            378.57916259765625
+        ],
+        "pathLength": 170.40699768066406
+    },
+    {
+        "id": "Montenegro",
+        "neighbors": [
+            "Albania",
+            "Bosnia and Herzegovina",
+            "Croatia",
+            "Kosovo",
+            "Republic of Serbia"
+        ],
+        "bb": [
+            448.7407531738281,
+            264.639892578125,
+            454.34014892578125,
+            271.2779541015625
+        ],
+        "pathLength": 19.80938148498535
+    },
+    {
+        "id": "Mongolia",
+        "neighbors": [
+            "China",
+            "Russia"
+        ],
+        "bb": [
+            654.0778198242188,
+            226.93338012695312,
+            748.95654296875,
+            272.39031982421875
+        ],
+        "pathLength": 258.1340637207031
+    },
+    {
+        "id": "Mozambique",
+        "neighbors": [
+            "Malawi",
+            "Swaziland",
+            "United Republic of Tanzania",
+            "South Africa",
+            "Zambia",
+            "Zimbabwe"
+        ],
+        "bb": [
+            483.4947509765625,
+            438.8944091796875,
+            514.8903198242188,
+            490.43902587890625
+        ],
+        "pathLength": 174.9635467529297
+    },
+    {
+        "id": "Mauritania",
+        "neighbors": [
+            "Algeria",
+            "Morocco",
+            "Mali",
+            "Western Sahara",
+            "Senegal"
+        ],
+        "bb": [
+            343.5157775878906,
+            323.70367431640625,
+            379.4864196777344,
+            364.3719787597656
+        ],
+        "pathLength": 147.8616943359375
+    },
+    {
+        "id": "Malawi",
+        "neighbors": [
+            "Mozambique",
+            "United Republic of Tanzania",
+            "Zambia"
+        ],
+        "bb": [
+            490.9278869628906,
+            435.6277160644531,
+            500.0649108886719,
+            458.66949462890625
+        ],
+        "pathLength": 58.10612869262695
+    },
+    {
+        "id": "Malaysia",
+        "neighbors": [
+            "Brunei",
+            "Indonesia",
+            "Thailand"
+        ],
+        "bb": [
+            690.6244506835938,
+            387.5809326171875,
+            747.2056274414062,
+            405.86785888671875
+        ],
+        "pathLength": 129.21011352539062
+    },
+    {
+        "id": "Namibia",
+        "neighbors": [
+            "Angola",
+            "Botswana",
+            "South Africa",
+            "Zambia"
+        ],
+        "bb": [
+            428.8420715332031,
+            459.10308837890625,
+            468.3983459472656,
+            498.1614685058594
+        ],
+        "pathLength": 144.02224731445312
+    },
+    {
+        "id": "New Caledonia",
+        "neighbors": [],
+        "bb": [
+            880.0877075195312,
+            468.99261474609375,
+            889.2445068359375,
+            476.2873229980469
+        ],
+        "pathLength": 23.939027786254883
+    },
+    {
+        "id": "Niger",
+        "neighbors": [
+            "Benin",
+            "Burkina Faso",
+            "Cameroon",
+            "Algeria",
+            "Libya",
+            "Mali",
+            "Nigeria",
+            "Chad"
+        ],
+        "bb": [
+            394.9500732421875,
+            336.5820007324219,
+            441.1947937011719,
+            373.36907958984375
+        ],
+        "pathLength": 155.69589233398438
+    },
+    {
+        "id": "Nigeria",
+        "neighbors": [
+            "Benin",
+            "Cameroon",
+            "Niger"
+        ],
+        "bb": [
+            402.04949951171875,
+            366.66748046875,
+            437.2657165527344,
+            395.5824890136719
+        ],
+        "pathLength": 112.60899353027344
+    },
+    {
+        "id": "Nicaragua",
+        "neighbors": [
+            "Costa Rica",
+            "Honduras"
+        ],
+        "bb": [
+            134.31558227539062,
+            363.14776611328125,
+            147.71194458007812,
+            376.1881408691406
+        ],
+        "pathLength": 47.28859329223633
+    },
+    {
+        "id": "Netherlands",
+        "neighbors": [
+            "Belgium",
+            "Germany"
+        ],
+        "bb": [
+            403.8962097167969,
+            219.76608276367188,
+            415.0875549316406,
+            232.8435516357422
+        ],
+        "pathLength": 41.54267120361328
+    },
+    {
+        "id": "Norway",
+        "neighbors": [
+            "Finland",
+            "Sweden"
+        ],
+        "bb": [
+            408.86541748046875,
+            -17.025712966918945,
+            486.7953186035156,
+            195.65304374694824
+        ],
+        "pathLength": 576.8345336914062
+    },
+    {
+        "id": "Nepal",
+        "neighbors": [
+            "China",
+            "India"
+        ],
+        "bb": [
+            631.3731079101562,
+            313.45623779296875,
+            655.332763671875,
+            327.0189514160156
+        ],
+        "pathLength": 59.954891204833984
+    },
+    {
+        "id": "New Zealand",
+        "neighbors": [],
+        "bb": [
+            887.4345092773438,
+            517.0072631835938,
+            923.0136108398438,
+            564.763916015625
+        ],
+        "pathLength": 160.5106201171875
+    },
+    {
+        "id": "Oman",
+        "neighbors": [
+            "United Arab Emirates",
+            "Saudi Arabia",
+            "Yemen"
+        ],
+        "bb": [
+            548.148193359375,
+            327.02545166015625,
+            571.2831420898438,
+            358.11273193359375
+        ],
+        "pathLength": 87.51412200927734
+    },
+    {
+        "id": "Pakistan",
+        "neighbors": [
+            "Afghanistan",
+            "China",
+            "India",
+            "Iran"
+        ],
+        "bb": [
+            574.4421997070312,
+            289.5101318359375,
+            624.7035522460938,
+            335.86981201171875
+        ],
+        "pathLength": 189.94168090820312
+    },
+    {
+        "id": "Panama",
+        "neighbors": [
+            "Colombia",
+            "Costa Rica"
+        ],
+        "bb": [
+            148.24952697753906,
+            379.5453186035156,
+            165.20721435546875,
+            386.7076416015625
+        ],
+        "pathLength": 57.73899841308594
+    },
+    {
+        "id": "Peru",
+        "neighbors": [
+            "Bolivia",
+            "Brazil",
+            "Chile",
+            "Colombia",
+            "Ecuador"
+        ],
+        "bb": [
+            152.85646057128906,
+            408.32818603515625,
+            190.62197875976562,
+            463.4767761230469
+        ],
+        "pathLength": 184.61221313476562
+    },
+    {
+        "id": "Philippines",
+        "neighbors": [],
+        "bb": [
+            741.2571411132812,
+            352.3494873046875,
+            768.999755859375,
+            391.59619140625
+        ],
+        "pathLength": 216.27809143066406
+    },
+    {
+        "id": "Papua New Guinea",
+        "neighbors": [
+            "Indonesia"
+        ],
+        "bb": [
+            811.8524780273438,
+            415.5684509277344,
+            856.35546875,
+            439.9049987792969
+        ],
+        "pathLength": 171.79774475097656
+    },
+    {
+        "id": "Poland",
+        "neighbors": [
+            "Belarus",
+            "Czech Republic",
+            "Germany",
+            "Lithuania",
+            "Russia",
+            "Slovakia",
+            "Ukraine"
+        ],
+        "bb": [
+            435.7763671875,
+            212.9752655029297,
+            465.2740478515625,
+            241.01852416992188
+        ],
+        "pathLength": 103.1317138671875
+    },
+    {
+        "id": "Puerto Rico",
+        "neighbors": [],
+        "bb": [
+            194.83724975585938,
+            352.30145263671875,
+            199.73036193847656,
+            354.0922546386719
+        ],
+        "pathLength": 11.805573463439941
+    },
+    {
+        "id": "North Korea",
+        "neighbors": [
+            "China",
+            "South Korea",
+            "Russia"
+        ],
+        "bb": [
+            762.2684936523438,
+            266.8304748535156,
+            781.5703735351562,
+            287.5107727050781
+        ],
+        "pathLength": 73.86924743652344
+    },
+    {
+        "id": "Portugal",
+        "neighbors": [
+            "Spain"
+        ],
+        "bb": [
+            365.8471984863281,
+            269.6694641113281,
+            375.1434326171875,
+            290.6034851074219
+        ],
+        "pathLength": 56.693572998046875
+    },
+    {
+        "id": "Paraguay",
+        "neighbors": [
+            "Argentina",
+            "Bolivia",
+            "Brazil"
+        ],
+        "bb": [
+            208.340576171875,
+            466.59124755859375,
+            233.20603942871094,
+            493.12384033203125
+        ],
+        "pathLength": 89.23251342773438
+    },
+    {
+        "id": "Qatar",
+        "neighbors": [
+            "Saudi Arabia"
+        ],
+        "bb": [
+            544.4263916015625,
+            327.9549865722656,
+            546.9827880859375,
+            333.0635986328125
+        ],
+        "pathLength": 12.44991683959961
+    },
+    {
+        "id": "Romania",
+        "neighbors": [
+            "Bulgaria",
+            "Hungary",
+            "Moldova",
+            "Republic of Serbia",
+            "Ukraine"
+        ],
+        "bb": [
+            453.9857482910156,
+            244.63389587402344,
+            481.8564147949219,
+            263.9663391113281
+        ],
+        "pathLength": 84.7008056640625
+    },
+    {
+        "id": "Russia",
+        "neighbors": [
+            "Azerbaijan",
+            "Belarus",
+            "China",
+            "Estonia",
+            "Finland",
+            "Georgia",
+            "Kazakhstan",
+            "Lithuania",
+            "Latvia",
+            "Mongolia",
+            "Poland",
+            "North Korea",
+            "Ukraine"
+        ],
+        "bb": [
+            -139.25926208496094,
+            -28.20938491821289,
+            927.4073638916016,
+            274.1513023376465
+        ],
+        "pathLength": 3070.71875
+    },
+    {
+        "id": "Rwanda",
+        "neighbors": [
+            "Burundi",
+            "Democratic Republic of the Congo",
+            "United Republic of Tanzania",
+            "Uganda"
+        ],
+        "bb": [
+            480.0738525390625,
+            411.5208740234375,
+            485.3811340332031,
+            416.8079528808594
+        ],
+        "pathLength": 17.886930465698242
+    },
+    {
+        "id": "Western Sahara",
+        "neighbors": [
+            "Morocco",
+            "Mauritania"
+        ],
+        "bb": [
+            343.5157775878906,
+            322.83270263671875,
+            368.3996276855469,
+            344.4954528808594
+        ],
+        "pathLength": 85.56713104248047
+    },
+    {
+        "id": "Saudi Arabia",
+        "neighbors": [
+            "United Arab Emirates",
+            "Egypt",
+            "Iraq",
+            "Jordan",
+            "Kuwait",
+            "Oman",
+            "Qatar",
+            "Yemen"
+        ],
+        "bb": [
+            496.68841552734375,
+            307.4285583496094,
+            559.0123291015625,
+            359.049560546875
+        ],
+        "pathLength": 191.22483825683594
+    },
+    {
+        "id": "Sudan",
+        "neighbors": [
+            "Central African Republic",
+            "Egypt",
+            "Eritrea",
+            "Ethiopia",
+            "Libya",
+            "South Sudan",
+            "Chad"
+        ],
+        "bb": [
+            459.072021484375,
+            341.31005859375,
+            507.8817443847656,
+            382.5218505859375
+        ],
+        "pathLength": 183.51597595214844
+    },
+    {
+        "id": "South Sudan",
+        "neighbors": [
+            "Central African Republic",
+            "Democratic Republic of the Congo",
+            "Ethiopia",
+            "Kenya",
+            "Sudan",
+            "Uganda"
+        ],
+        "bb": [
+            464.8503112792969,
+            371.5887145996094,
+            498.6607666015625,
+            397.754638671875
+        ],
+        "pathLength": 111.52751159667969
+    },
+    {
+        "id": "Senegal",
+        "neighbors": [
+            "Guinea",
+            "Gambia",
+            "Guinea Bissau",
+            "Mali",
+            "Mauritania"
+        ],
+        "bb": [
+            341.8517150878906,
+            358.2759704589844,
+            360.0951232910156,
+            371.333740234375
+        ],
+        "pathLength": 70.65748596191406
+    },
+    {
+        "id": "Solomon Islands",
+        "neighbors": [],
+        "bb": [
+            857.752197265625,
+            427.75567626953125,
+            875.2552490234375,
+            440.429443359375
+        ],
+        "pathLength": 49.441619873046875
+    },
+    {
+        "id": "Sierra Leone",
+        "neighbors": [
+            "Guinea",
+            "Liberia"
+        ],
+        "bb": [
+            354.8250427246094,
+            378.2361145019531,
+            363.7626953125,
+            388.0050964355469
+        ],
+        "pathLength": 29.459169387817383
+    },
+    {
+        "id": "El Salvador",
+        "neighbors": [
+            "Guatemala",
+            "Honduras"
+        ],
+        "bb": [
+            127.12428283691406,
+            364.9617919921875,
+            134.152587890625,
+            368.8520812988281
+        ],
+        "pathLength": 18.188074111938477
+    },
+    {
+        "id": "Somaliland",
+        "neighbors": [
+            "Djibouti",
+            "Ethiopia",
+            "Somalia"
+        ],
+        "bb": [
+            520.1741333007812,
+            373.9682922363281,
+            539.1057739257812,
+            384.3869323730469
+        ],
+        "pathLength": 51.87620544433594
+    },
+    {
+        "id": "Somalia",
+        "neighbors": [
+            "Ethiopia",
+            "Kenya",
+            "Somaliland"
+        ],
+        "bb": [
+            515.4993896484375,
+            372.2656555175781,
+            545.5818481445312,
+            413.1468200683594
+        ],
+        "pathLength": 110.44011688232422
+    },
+    {
+        "id": "Republic of Serbia",
+        "neighbors": [
+            "Bulgaria",
+            "Bosnia and Herzegovina",
+            "Croatia",
+            "Hungary",
+            "Kosovo",
+            "Macedonia",
+            "Montenegro",
+            "Romania"
+        ],
+        "bb": [
+            449.8661193847656,
+            253.57095336914062,
+            462.1807861328125,
+            269.8105773925781
+        ],
+        "pathLength": 56.376182556152344
+    },
+    {
+        "id": "Suriname",
+        "neighbors": [
+            "Brazil",
+            "France",
+            "Guyana"
+        ],
+        "bb": [
+            222.0897979736328,
+            390.2729797363281,
+            234.19837951660156,
+            402.7721252441406
+        ],
+        "pathLength": 45.08085632324219
+    },
+    {
+        "id": "Slovakia",
+        "neighbors": [
+            "Austria",
+            "Czech Republic",
+            "Hungary",
+            "Poland",
+            "Ukraine"
+        ],
+        "bb": [
+            444.0888366699219,
+            238.54591369628906,
+            460.9129943847656,
+            246.6812744140625
+        ],
+        "pathLength": 44.29700469970703
+    },
+    {
+        "id": "Slovenia",
+        "neighbors": [
+            "Austria",
+            "Croatia",
+            "Hungary",
+            "Italy"
+        ],
+        "bb": [
+            434.66107177734375,
+            250.6404266357422,
+            443.1549987792969,
+            256.62921142578125
+        ],
+        "pathLength": 26.70659828186035
+    },
+    {
+        "id": "Sweden",
+        "neighbors": [
+            "Denmark",
+            "Finland",
+            "Norway"
+        ],
+        "bb": [
+            426.7477722167969,
+            121.12713623046875,
+            464.8988952636719,
+            210.33261108398438
+        ],
+        "pathLength": 222.19566345214844
+    },
+    {
+        "id": "Swaziland",
+        "neighbors": [
+            "Mozambique",
+            "South Africa"
+        ],
+        "bb": [
+            484.9677429199219,
+            486.8658752441406,
+            489.1012268066406,
+            492.24725341796875
+        ],
+        "pathLength": 15.044843673706055
+    },
+    {
+        "id": "Syria",
+        "neighbors": [
+            "Iraq",
+            "Israel",
+            "Jordan",
+            "Lebanon",
+            "Turkey"
+        ],
+        "bb": [
+            499.8542175292969,
+            289.14996337890625,
+            519.5543212890625,
+            306.8963623046875
+        ],
+        "pathLength": 65.31917572021484
+    },
+    {
+        "id": "Chad",
+        "neighbors": [
+            "Central African Republic",
+            "Cameroon",
+            "Libya",
+            "Niger",
+            "Sudan"
+        ],
+        "bb": [
+            434.1937561035156,
+            336.7820739746094,
+            464.85003662109375,
+            386.1060485839844
+        ],
+        "pathLength": 150.7003173828125
+    },
+    {
+        "id": "Togo",
+        "neighbors": [
+            "Benin",
+            "Burkina Faso",
+            "Ghana"
+        ],
+        "bb": [
+            393.92657470703125,
+            375.3076171875,
+            399.6007080078125,
+            390.5603332519531
+        ],
+        "pathLength": 37.23408508300781
+    },
+    {
+        "id": "Thailand",
+        "neighbors": [
+            "Cambodia",
+            "Laos",
+            "Myanmar",
+            "Malaysia"
+        ],
+        "bb": [
+            682.5952758789062,
+            346.3387145996094,
+            706.9304809570312,
+            391.2675476074219
+        ],
+        "pathLength": 152.9816131591797
+    },
+    {
+        "id": "Tajikistan",
+        "neighbors": [
+            "Afghanistan",
+            "China",
+            "Kyrgyzstan",
+            "Uzbekistan"
+        ],
+        "bb": [
+            593.9028930664062,
+            274.9026184082031,
+            616.237060546875,
+            290.9738464355469
+        ],
+        "pathLength": 89.02640533447266
+    },
+    {
+        "id": "Turkmenistan",
+        "neighbors": [
+            "Afghanistan",
+            "Iran",
+            "Kazakhstan",
+            "Uzbekistan"
+        ],
+        "bb": [
+            549.6369018554688,
+            267.7757873535156,
+            591.2478637695312,
+            296.34906005859375
+        ],
+        "pathLength": 145.55117797851562
+    },
+    {
+        "id": "East Timor",
+        "neighbors": [
+            "Indonesia"
+        ],
+        "bb": [
+            764.3516235351562,
+            432.7579345703125,
+            771.36572265625,
+            436.1158447265625
+        ],
+        "pathLength": 16.5927734375
+    },
+    {
+        "id": "Trinidad and Tobago",
+        "neighbors": [
+            "Venezuela"
+        ],
+        "bb": [
+            210.51852416992188,
+            375.69598388671875,
+            213.64443969726562,
+            378.3774719238281
+        ],
+        "pathLength": 10.106943130493164
+    },
+    {
+        "id": "Tunisia",
+        "neighbors": [
+            "Algeria",
+            "Libya"
+        ],
+        "bb": [
+            416.36883544921875,
+            288.7026062011719,
+            428.11492919921875,
+            313.8516845703125
+        ],
+        "pathLength": 68.70988464355469
+    },
+    {
+        "id": "Turkey",
+        "neighbors": [
+            "Armenia",
+            "Bulgaria",
+            "Georgia",
+            "Iran",
+            "Iraq",
+            "Syria"
+        ],
+        "bb": [
+            471.23956298828125,
+            270.2254638671875,
+            526.7969970703125,
+            294.343017578125
+        ],
+        "pathLength": 180.51028442382812
+    },
+    {
+        "id": "Taiwan",
+        "neighbors": [],
+        "bb": [
+            749.9442749023438,
+            330.64862060546875,
+            755.4110717773438,
+            341.4040832519531
+        ],
+        "pathLength": 24.698665618896484
+    },
+    {
+        "id": "United Republic of Tanzania",
+        "neighbors": [
+            "Burundi",
+            "Democratic Republic of the Congo",
+            "Kenya",
+            "Mozambique",
+            "Malawi",
+            "Rwanda",
+            "Uganda",
+            "Zambia"
+        ],
+        "bb": [
+            481.0074157714844,
+            410.9736328125,
+            513.5306396484375,
+            443.1322021484375
+        ],
+        "pathLength": 110.78060150146484
+    },
+    {
+        "id": "Uganda",
+        "neighbors": [
+            "Democratic Republic of the Congo",
+            "Kenya",
+            "Rwanda",
+            "South Sudan",
+            "United Republic of Tanzania"
+        ],
+        "bb": [
+            481.7169494628906,
+            395.55487060546875,
+            497.8844299316406,
+            412.4356689453125
+        ],
+        "pathLength": 57.50931930541992
+    },
+    {
+        "id": "Ukraine",
+        "neighbors": [
+            "Belarus",
+            "Hungary",
+            "Moldova",
+            "Poland",
+            "Romania",
+            "Russia",
+            "Slovakia"
+        ],
+        "bb": [
+            459.5129089355469,
+            225.54278564453125,
+            512.8319702148438,
+            261.1929016113281
+        ],
+        "pathLength": 197.92005920410156
+    },
+    {
+        "id": "Uruguay",
+        "neighbors": [
+            "Argentina",
+            "Brazil"
+        ],
+        "bb": [
+            220.95681762695312,
+            501.78729248046875,
+            236.41603088378906,
+            518.8164672851562
+        ],
+        "pathLength": 52.69780731201172
+    },
+    {
+        "id": "USA",
+        "neighbors": [
+            "Canada",
+            "Mexico"
+        ],
+        "bb": [
+            -114.9366226196289,
+            101.38139343261719,
+            195.66027069091797,
+            351.0638732910156
+        ],
+        "pathLength": 1268.9697265625
+    },
+    {
+        "id": "Uzbekistan",
+        "neighbors": [
+            "Afghanistan",
+            "Kazakhstan",
+            "Kyrgyzstan",
+            "Tajikistan",
+            "Turkmenistan"
+        ],
+        "bb": [
+            559.7893676757812,
+            256.06048583984375,
+            610.5345458984375,
+            289.4656677246094
+        ],
+        "pathLength": 173.9326171875
+    },
+    {
+        "id": "Venezuela",
+        "neighbors": [
+            "Brazil",
+            "Colombia",
+            "Guyana",
+            "Trinidad and Tobago"
+        ],
+        "bb": [
+            176.8742218017578,
+            371.8485107421875,
+            217.01248168945312,
+            406.0121154785156
+        ],
+        "pathLength": 169.10025024414062
+    },
+    {
+        "id": "Vietnam",
+        "neighbors": [
+            "China",
+            "Cambodia",
+            "Laos"
+        ],
+        "bb": [
+            696.80126953125,
+            336.96820068359375,
+            718.0304565429688,
+            382.5816955566406
+        ],
+        "pathLength": 137.55601501464844
+    },
+    {
+        "id": "Vanuatu",
+        "neighbors": [],
+        "bb": [
+            887.7900390625,
+            451.9749755859375,
+            891.3922119140625,
+            458.0401306152344
+        ],
+        "pathLength": 15.18912410736084
+    },
+    {
+        "id": "West Bank",
+        "neighbors": [
+            "Israel",
+            "Jordan"
+        ],
+        "bb": [
+            497.56268310546875,
+            306.1256408691406,
+            499.3945617675781,
+            310.24273681640625
+        ],
+        "pathLength": 10.970294952392578
+    },
+    {
+        "id": "Yemen",
+        "neighbors": [
+            "Oman",
+            "Saudi Arabia"
+        ],
+        "bb": [
+            520.3107299804688,
+            350.8013000488281,
+            551.4328002929688,
+            370.56341552734375
+        ],
+        "pathLength": 87.36311340332031
+    },
+    {
+        "id": "South Africa",
+        "neighbors": [
+            "Botswana",
+            "Lesotho",
+            "Mozambique",
+            "Namibia",
+            "Swaziland",
+            "Zimbabwe"
+        ],
+        "bb": [
+            442.5036315917969,
+            475.2992248535156,
+            491.3485107421875,
+            518.3342895507812
+        ],
+        "pathLength": 199.0497589111328
+    },
+    {
+        "id": "Zambia",
+        "neighbors": [
+            "Angola",
+            "Democratic Republic of the Congo",
+            "Mozambique",
+            "Malawi",
+            "Namibia",
+            "United Republic of Tanzania",
+            "Zimbabwe"
+        ],
+        "bb": [
+            458.92694091796875,
+            432.65289306640625,
+            493.2909240722656,
+            462.2708435058594
+        ],
+        "pathLength": 133.32859802246094
+    },
+    {
+        "id": "Zimbabwe",
+        "neighbors": [
+            "Botswana",
+            "Mozambique",
+            "South Africa",
+            "Zambia"
+        ],
+        "bb": [
+            468.9310302734375,
+            454.67919921875,
+            491.406982421875,
+            475.87615966796875
+        ],
+        "pathLength": 71.92516326904297
+    }
+]
+}
