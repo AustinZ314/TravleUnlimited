@@ -744,7 +744,6 @@
         "id": "Egypt",
         "neighbors": [
             "Israel",
-            "Jordan",
             "Libya",
             "Saudi Arabia",
             "Sudan"
@@ -1258,7 +1257,6 @@
     {
         "id": "Jordan",
         "neighbors": [
-            "Egypt",
             "Iraq",
             "Israel",
             "Saudi Arabia",

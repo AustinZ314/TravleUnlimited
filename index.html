@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Austin Zhang">
     <title>travle unlimited</title>
 
     <!-- Load d3.js -->
@@ -23,7 +23,6 @@
     </style>
 
     <script>
-        var paths = [];
         // The svg
         const svg = d3.select("svg"),
             width = +svg.attr("width"),
@@ -36,66 +35,54 @@
             .translate([width / 2, height / 2]);
         
         var currentDisplay = []; // List of displayed countries
-        var paths = []; // List of shortest paths between start and end countries
+        var path = []; // Shortest path between start and target countries
 
         document.addEventListener('DOMContentLoaded', async function() {
-            var endpoints = await randomCountry();
-            console.log(endpoints); 
-            paths = await findShortestPaths(endpoints[0], endpoints[1]);
-            while(paths.length === 0 || paths[0].length <= 3) {
-                endpoints = await randomCountry();
+            var graph = await fetch('./neighbors.json');
+            const data = await graph.json();
+            var endpoints = randomCountry(data.features);
+            console.log(endpoints);
+            
+            path = findShortestPath(data.features, endpoints[0], endpoints[1]);
+            path = findAlternatePaths(data.features);
+            while(path.length === 0 || path[0].length <= 3) {
+                endpoints = randomCountry(data.features);
                 console.log(endpoints);
-                paths = await findShortestPaths(endpoints[0], endpoints[1]);
+                path = findShortestPath(data.features, endpoints[0], endpoints[1]);
             }
-            console.log(paths);
-            currentDisplay.push(endpoints[0]);
-            currentDisplay.push(endpoints[1]);
-            display(endpoints[0]);
-            display(endpoints[1]);
+            console.log(path);
+            currentDisplay.push(endpoints[0], endpoints[1]);
+            displayCountry(endpoints[0]);
+            displayCountry(endpoints[1]);
         })
 
-        async function addCountry() {
-            
+        function addCountry() {
             var countryID = document.querySelector("#userInput");
             if(!currentDisplay.includes(countryID)) {
                 currentDisplay.push(countryID.value);
             }
-            display(countryID.value);
+            displayCountry(countryID.value);
             
-            const checkWin = (displayedCountry) => currentDisplay.includes(displayedCountry);
+            const checkWin = (displayedCountry) => Array.isArray(displayedCountry) ? displayedCountry.some(checkWin): currentDisplay.includes(displayedCountry);
 
-            for(let i = 0; i < paths.length; i++) {
-                if(paths[i].every(checkWin)) {
-                    console.log("You win!");
-                }
-            }
-        }
-
-        async function randomCountry() {
-            try {
-                var start = Math.floor(Math.random()*177);
-                var end = Math.floor(Math.random()*177);
-                while(start === end) end = Math.floor(Math.random()*177);
-                const response = await fetch('./neighbors.json');
-                if(!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                const startCountry = data.features[start].id;
-                //console.log(startCountry);
-                const endCountry = data.features[end].id;
-                //console.log(endCountry);
-                return [startCountry, endCountry];
-            } catch(error) {
-                console.log("Error generating random countries: ", error);
-                throw error;
+            if(path.every(checkWin)) {
+                console.log("You win!");
             }
         }
         
-        function display(countryName) {
+        function randomCountry(graph) {
+            var startIndex = Math.floor(Math.random()*177);
+            var targetIndex = Math.floor(Math.random()*177);
+            while(startIndex === targetIndex) targetIndex = Math.floor(Math.random()*177);
+            const startCountry = graph[startIndex].id;
+            const targetCountry = graph[targetIndex].id;
+            return [startCountry, targetCountry];
+        }
+        
+        // Add given country to the svg by fetching map data and filtering for selected country
+        function displayCountry(countryName) {
             d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson").then(function(data) {
-                var newCountry = data.features.find(d => d.properties.name === countryName)
-                
+                var newCountry = data.features.find(country => country.properties.name === countryName)
                 svg.append("g")
                     .selectAll("path")
                     .data([newCountry])
@@ -104,68 +91,89 @@
                     .attr("d", d3.geoPath()
                         .projection(projection))
                     .style("stroke", "#fff");
-            })
+            });
         }
 
-        async function getNeighbors(countryID) {
-            try {
-                const response = await fetch('./neighbors.json');
-                if(!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                const country = data.features.find(feature => feature.id === countryID);
-                if(!country) {
-                    throw new Error('Country not found');
-                }
-                return country.neighbors;
-            } catch(error) {
-                console.error('Error fetching country neighbors:', error);
-                throw error; // Re-throw the error for the caller to handle
+        // Use dijkstra's algorithm to find shortest path from start to target
+        // Each country is represented by a node
+        // Neighboring countries have a distance of 1
+        function findShortestPath(graph, start, target) {
+            var dist = {};
+            var prev = {};
+            var vertices = [];
+            for (var i = 0; i < graph.length; i++) {
+                var vertex = graph[i];
+                dist[vertex.id] = Infinity;
+                prev[vertex.id] = null;
+                vertices.push(vertex);
             }
-        }
+            dist[start] = 0;
 
-        async function findShortestPaths(start, end) {
-            var shortestPaths = [];
-            const queue = [[start]];
-
-            var shortPathFound = false; // Set true when first path to target is found to stop enqueuing
-            while(queue.length > 0) {
-                const path = queue.shift();
-                //console.log(path);
-                if(path.length > 6) return shortestPaths;
-                const currentCountry = path[path.length - 1];
-                if(currentCountry === end) {
-                    if(shortPathFound && path.length > shortestPaths[0].length) {
-                        break;
-                    }
-                    shortestPaths.push(path);
-                    shortPathFound = true;
-                }
-
-                if(!shortPathFound) {
-                    for(const neighbor of await getNeighbors(currentCountry)) {
-                        queue.push(path.concat(neighbor));
+            // Find the vertex having smallest distance from start country
+            while (vertices.length > 0) {
+                var u = vertices.reduce(function(p, current) {return !p || dist[current.id] < dist[p.id] ? current : p;}, null);
+                const index = vertices.indexOf(u);
+                vertices.splice(index, 1);
+                if (u.neighbors && Array.isArray(u.neighbors)) {
+                    for (let i = 0; i < u.neighbors.length; i++) {
+                        var v = u.neighbors[i];
+                        const alt = dist[u.id] + 1;
+                        if (alt < dist[v]) {
+                            dist[v] = alt;
+                            prev[v] = u;
+                        }
                     }
                 }
             }
-            return shortestPaths;
+
+            var result = [];
+            while (target) {
+                result.splice(0, 0, target);
+                target = prev[target] ? prev[target].id : null;
+            }
+
+            // Any empty array return means there is no path. For example one of the countries is an island.
+            if (result.length === 1) {
+                return [];
+            }
+            return result;
         }
 
+        // Look for alternative paths with the same length as the shortest path
+        function findAlternatePaths(graph) {
+            var newPath = path;
+            for(let i = 1; i < path.length - 1; i++) {
+                var neighbors = graph.find(country => country.id === path[i]).neighbors;
+                for(let j = 0; j < neighbors.length; j++) {
+                    var neighborsOfNeighbor = graph.find(country => country.id === neighbors[j]).neighbors;
+                    if(neighborsOfNeighbor.includes(path[i - 1]) && neighborsOfNeighbor.includes(path[i + 1])) {
+                        newPath[i] = [path[i], neighbors[j]];
+                    }
+                }
+            }
+            return newPath;
+        }
+
+        // Clear current display and select two new countries to play again
         async function restart() {
+            svg.selectAll("path").remove();
             currentDisplay = [];
             path = [];
-            var endpoints = await randomCountry();
-            console.log(endpoints); 
-            paths = await findShortestPaths(endpoints[0], endpoints[1]);
-            while(paths.length === 0) {
-                endpoints = await randomCountry();
+            var graph = await fetch('./neighbors.json');
+            const data = await graph.json();
+            var endpoints = randomCountry(data.features);
+            console.log(endpoints);
+            
+            path = findShortestPath(data.features, endpoints[0], endpoints[1]);
+            while(path.length === 0 || path[0].length <= 3) {
+                endpoints = randomCountry(data.features);
                 console.log(endpoints);
-                paths = await findShortestPaths(endpoints[0], endpoints[1]);
+                path = findShortestPath(data.features, endpoints[0], endpoints[1]);
             }
-            console.log(paths);
-            currentDisplay.push(endpoints[0]);
-            currentDisplay.push(endpoints[1]);
+            console.log(path);
+            currentDisplay.push(endpoints[0], endpoints[1]);
+            displayCountry(endpoints[0]);
+            displayCountry(endpoints[1]);
         }
         
     </script>
