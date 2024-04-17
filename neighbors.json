@@ -1,7 +1,5 @@
-{
-    "type": "FeatureCollection",
-                                                                                    
-    "features": [
+{                                                                             
+    "countries": [
     {
         "id": "Afghanistan",
         "neighbors": [
@@ -745,7 +743,6 @@
         "neighbors": [
             "Israel",
             "Libya",
-            "Saudi Arabia",
             "Sudan"
         ],
         "bb": [
@@ -2106,7 +2103,6 @@
         "id": "Saudi Arabia",
         "neighbors": [
             "United Arab Emirates",
-            "Egypt",
             "Iraq",
             "Jordan",
             "Kuwait",
