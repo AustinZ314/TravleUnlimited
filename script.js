@@ -4,7 +4,7 @@ var countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla"
 const svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height");
-        
+
 // Map and projection
 const projection = d3.geoMercator()
     .center([2, 47])
@@ -95,6 +95,16 @@ async function addCountry() {
 
     if(document.getElementById('past-guesses-list').innerHTML == '') document.getElementById('past-guesses-list').innerHTML = countryID.value;
     else document.getElementById('past-guesses-list').innerHTML = document.getElementById('past-guesses-list').innerHTML + ", " + countryID.value;
+
+    var found = false;
+    path.forEach((country) => {
+        if(country == countryID.value) {
+            document.getElementById('past-guesses-list').innerHTML = document.getElementById('past-guesses-list').innerHTML + " 🟩";
+            found = true;
+        }
+    });
+    if(!found) document.getElementById('past-guesses-list').innerHTML = document.getElementById('past-guesses-list').innerHTML + " 🟥";
+
 }
 
 function pickRandom(countries) {
@@ -124,7 +134,7 @@ function displayCountry(data, countryName, color) {
     return true;
 }
 
-// Use dijkstra's algorithm to find shortest path from source to target
+// Use Dijkstra's algorithm to find shortest path from source to target
 // Each country is represented by a node
 // Neighboring countries have a distance of 1
 function findShortestPath(countries, source, target) {
@@ -210,6 +220,27 @@ async function restart() {
     displayCountry(displayData.features, endpoints[1], "#95cade");
     document.getElementById('title').innerHTML = "Today I'd like to go from " + endpoints[0] + " to " + endpoints[1];
 }   
+
+// Create zoom behavior function
+const zoom = d3.zoom()
+    .scaleExtent([0.8, 6])
+    .on("zoom", zoomed);
+
+// Called when there is a zoom event like scrolling or button clicks
+function zoomed(e) {
+    d3.selectAll("path")
+        .attr("transform", e.transform);
+}
+
+d3.select("svg").call(zoom);
+
+function handleButtonZoom(scaleFactor) {
+    if(scaleFactor == 0) {
+        svg.transition().call(zoom.transform, d3.zoomIdentity);
+        return;
+    }
+    svg.transition().call(zoom.scaleBy, scaleFactor);
+}
 
 // Autocomplete function for user input
 // inp is the id of a text field element

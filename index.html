@@ -17,8 +17,9 @@
     <p id="title" style="color:white"></p>
     <svg id="map" width="600" height="400"></svg>
     <div id="button-container">
-        <button class="side-button" id="zoom-in">+</button>
-        <button class="side-button" id="zoom-out">-</button>
+        <button class="side-button" id="zoom-in" onclick="handleButtonZoom(1.5)">+</button>
+        <button class="side-button" id="zoom-out" onclick="handleButtonZoom(0.5)">-</button>
+        <button class="side-button" id="reset-zoom" onclick="handleButtonZoom(0)">Reset Zoom</button>
         <button class="side-button" id="restart-button" onclick="restart()">Restart</button>
     </div>
 

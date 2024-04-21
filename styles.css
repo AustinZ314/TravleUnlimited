@@ -21,7 +21,7 @@ p {
 
 button {
   background-color: white;
-  border: 2px;
+  border: 2px black;
   color: black;
   padding: 10px;
   text-align: center;
@@ -41,13 +41,14 @@ button {
 #button-container button {
   height: 50px;
   width: 50px;
-  border: none;
+  border: 2px black;
   padding: 15px 32px;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   display: flex;
   font-size: 16px;
+  margin-top: 5px;
 }
 
 .autocomplete {
