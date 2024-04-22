@@ -11,33 +11,29 @@ const projection = d3.geoMercator()
     .scale(width / 1.5 / Math.PI)
     .translate([width / 2, height / 2]);
 
-// Define path generator for displaying meridians
+// Define path generator for displaying parallels and meridians
 var path = d3.geoPath()
     .projection(projection);
- 
-// Calculate coordinates for points along each parallel
-var yScale = d3.scaleLinear()
-    .domain([-90, 90])
-    .range([height, 0]);
 
-// Display parallels as equidistant lines to avoid Mercator projection distortion
+// Display parallels
 svg.selectAll(".parallels")
     .data(d3.range(-90, 91, 10))
-    .enter().append("line")
+    .enter().append("path")
     .attr("class", "parallels")
     .style("stroke", "gray")
     .style("stroke-width", 0.2)
-    .attr("x1", 0)
-    .attr("y1", function(d) { return yScale(d); })
-    .attr("x2", width)
-    .attr("y2", function(d) { return yScale(d); });
+    .attr("d", function(d) {
+        const coords = d3.range(-180, 181, 1).map(function(x) {
+            return [x, d];
+        });
+        return path({ type: "LineString", coordinates: coords });
+    });
 
 // Display meridians
 svg.selectAll(".meridians")
     .data(d3.range(-180, 181, 10))
     .enter().append("path")
     .attr("class", "meridians")
-    .style("fill", "none")
     .style("stroke", "gray")
     .style("stroke-width", 0.2)
     .attr("d", function(d) {
@@ -222,8 +218,10 @@ async function restart() {
 }   
 
 // Create zoom behavior function
+const padding = 200;
 const zoom = d3.zoom()
     .scaleExtent([0.8, 6])
+    .translateExtent([[-padding, -padding], [width + padding, height + padding*2]])
     .on("zoom", zoomed);
 
 // Called when there is a zoom event like scrolling or button clicks
