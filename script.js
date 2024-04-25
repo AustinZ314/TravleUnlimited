@@ -5,9 +5,8 @@ const svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height");
 
-// Map and projection
 const projection = d3.geoMercator()
-    .center([2, 47])
+    .center([0, 0])
     .scale(width / 1.5 / Math.PI)
     .translate([width / 2, height / 2]);
 
@@ -40,7 +39,8 @@ svg.selectAll(".meridians")
         return path({type: "LineString", coordinates: [[d, -90], [d, 90]]});
     });
 
-var currentDisplay = []; // List of displayed countries
+var displayedNames = []; // List of currently displayed countries' names
+var displayedCoords = [] // List of currently displayed countries' coordinates
 var path = []; // Shortest path between source and target countries
 
 // Select and display source and target countries on load
@@ -58,7 +58,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         path = findShortestPath(data, endpoints[0], endpoints[1]);
     }
     console.log(path);
-    currentDisplay.push(endpoints[0], endpoints[1]);
 
     const displayData = await d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
     displayCountry(displayData.features, endpoints[0], "#f5bac8");
@@ -75,15 +74,8 @@ async function addCountry() {
         alert("Unknown country name: " + countryID.value);
         return;
     }
-
-    if(!currentDisplay.includes(countryID.value)) {
-        currentDisplay.push(countryID.value);
-    } else {
-        alert("Country already guessed: " + countryID.value);
-        return;
-    }
     
-    const checkWin = (displayedCountry) => Array.isArray(displayedCountry) ? displayedCountry.some(checkWin): currentDisplay.includes(displayedCountry);
+    const checkWin = (displayedCountry) => Array.isArray(displayedCountry) ? displayedCountry.some(checkWin): displayedNames.includes(displayedCountry);
 
     if(path.every(checkWin)) {
         alert("You win!");
@@ -100,7 +92,6 @@ async function addCountry() {
         }
     });
     if(!found) document.getElementById('past-guesses-list').innerHTML = document.getElementById('past-guesses-list').innerHTML + " 🟥";
-
 }
 
 function pickRandom(countries) {
@@ -117,6 +108,12 @@ function displayCountry(data, countryName, color) {
     var newCountry = data.find(country => country.properties.name === countryName)
     if(newCountry === undefined) return false;
 
+    const svgCoordinates = [];
+    if(displayedNames.includes(countryName)) {
+        alert("Country already guessed: " + countryName);
+        return true;
+    }
+
     svg.append("g")
         .selectAll("path")
         .data([newCountry])
@@ -127,7 +124,59 @@ function displayCountry(data, countryName, color) {
         .attr("stroke", "black")
         .attr("stroke-width", "0.3"); 
 
+    // Convert coordinates to corresponding values on the SVG
+    const coordinates = newCountry.geometry.coordinates;
+    coordinates.forEach((coords) => {
+        coords.forEach((coords2) => {
+            if(typeof coords2[0] != "number") {
+                coords2.forEach((coords3) => {
+                    svgCoordinates.push(projection(coords3));
+                })
+            } else {
+                svgCoordinates.push(projection(coords2));
+            } 
+        });
+    });
+    displayedCoords.push(svgCoordinates);
+    displayedNames.push(countryName); 
+
+    // Translate the display to center on the currently displayed countries
+    const bounds = calculateBounds(displayedCoords);
+    const center = [(bounds[0][0] + bounds[1][0]) / 2, (bounds[0][1] + bounds[1][1]) / 2];
+    svg.transition().call(zoom.transform, d3.zoomIdentity.translate(width / 2 - center[0], height / 2 - center[1]).scale(1));
+
     return true;
+}
+
+function normalizeLatitude(latitude) {
+    const maxLatitude = 50;
+
+    if (latitude > maxLatitude) {
+        return maxLatitude;
+    } else if (latitude < -maxLatitude) {
+        return -maxLatitude;
+    } else {
+        return latitude;
+    }
+}
+
+// Calculate an estimate of the max and min currently displayed coordinates to re-center display
+function calculateBounds(displayedCoords) {
+    let minX = Number.MAX_VALUE,
+        minY = Number.MAX_VALUE,
+        maxX = Number.MIN_VALUE,
+        maxY = Number.MIN_VALUE;
+
+    
+    displayedCoords.forEach((coords) => {
+        minX = Math.min(minX, coords[0][0]);
+        minY = Math.min(minY, coords[0][1]);
+        maxX = Math.max(maxX, coords[0][0]);
+        maxY = Math.max(maxY, coords[0][1]);
+    });
+    //console.log([[minX, minY], [maxX, maxY]]);
+
+    return [[minX, minY], [maxX, maxY]];
 }
 
 // Use Dijkstra's algorithm to find shortest path from source to target
@@ -195,8 +244,7 @@ function findAlternatePaths(countries) {
 // Clear current display and select two new countries to play again
 async function restart() {
     svg.selectAll("path").remove();
-    currentDisplay = [];
-    path = [];
+    displayedNames, displayedCoords, path = [];
     var response = await fetch('./neighbors.json');
     const data = (await response.json()).countries;
     var endpoints = pickRandom(data);
@@ -210,7 +258,6 @@ async function restart() {
         path = findShortestPath(data, endpoints[0], endpoints[1]);
     }
     console.log(path);
-    currentDisplay.push(endpoints[0], endpoints[1]);
     const displayData = await d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
     displayCountry(displayData.features, endpoints[0], "#f5bac8");
     displayCountry(displayData.features, endpoints[1], "#95cade");
@@ -221,7 +268,7 @@ async function restart() {
 const padding = 200;
 const zoom = d3.zoom()
     .scaleExtent([0.8, 6])
-    .translateExtent([[-padding, -padding], [width + padding, height + padding*2]])
+    .translateExtent([[-padding, -padding*1.5], [width + padding, height + padding*1.5]])
     .on("zoom", zoomed);
 
 // Called when there is a zoom event like scrolling or button clicks
