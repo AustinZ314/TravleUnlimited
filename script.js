@@ -10,34 +10,60 @@ const projection = d3.geoMercator()
     .scale(width / 1.5 / Math.PI)
     .translate([width / 2, height / 2]);
 
-// Define path generator for displaying parallels and meridians
-var path = d3.geoPath()
-    .projection(projection);
+const minZoom = 0.8;
+const maxZoom = 6;
 
-// Display parallels
-svg.selectAll(".parallels")
-    .data(d3.range(-90, 91, 10))
-    .enter().append("path")
-    .attr("class", "parallels")
-    .style("stroke", "gray")
-    .style("stroke-width", 0.2)
-    .attr("d", function(d) {
-        const coords = d3.range(-180, 181, 1).map(function(x) {
-            return [x, d];
+function displayMapLines() {
+    // Define path generator for displaying parallels and meridians
+    var path = d3.geoPath()
+        .projection(projection  );
+
+    // Display parallels
+    svg.selectAll(".parallels")
+        .data(d3.range(-90, 91, 10))
+        .enter().append("path")
+        .attr("class", "parallels")
+        .style("stroke", "gray")
+        .style("stroke-width", 0.2)
+        .attr("d", function(d) {
+            const coords = d3.range(-180, 181, 1).map(function(x) {
+                return [x, d];
+            });
+            return path({ type: "LineString", coordinates: coords });
         });
-        return path({ type: "LineString", coordinates: coords });
-    });
 
-// Display meridians
-svg.selectAll(".meridians")
-    .data(d3.range(-180, 181, 10))
-    .enter().append("path")
-    .attr("class", "meridians")
-    .style("stroke", "gray")
-    .style("stroke-width", 0.2)
-    .attr("d", function(d) {
-        return path({type: "LineString", coordinates: [[d, -90], [d, 90]]});
-    });
+    // Display meridians
+    svg.selectAll(".meridians")
+        .data(d3.range(-180, 181, 10))
+        .enter().append("path")
+        .attr("class", "meridians")
+        .style("stroke", "gray")
+        .style("stroke-width", 0.2)
+        .attr("d", function(d) {
+            return path({type: "LineString", coordinates: [[d, -90], [d, 90]]});
+        });
+}
+
+// Create zoom behavior function
+const padding = 200;
+const zoom = d3.zoom()
+    .scaleExtent([0.8, 6])
+    .translateExtent([[-padding, -padding*1.5], [width + padding, height + padding*1.5]])
+    .on("zoom", changeZoom);
+
+// Called when there is a zoom event like scrolling or button clicks
+function changeZoom(e) {
+    d3.selectAll("path")
+        .attr("transform", e.transform);
+}
+
+d3.select("svg")
+    .call(zoom);
+
+function handleButtonZoom(scaleFactor) {
+    svg.transition()
+        .call(zoom.scaleBy, scaleFactor);
+}
 
 var displayedNames = []; // List of currently displayed countries' names
 var displayedCoords = [] // List of currently displayed countries' coordinates
@@ -45,6 +71,7 @@ var path = []; // Shortest path between source and target countries
 
 // Select and display source and target countries on load
 document.addEventListener('DOMContentLoaded', async function() {
+    displayMapLines();
     var response = await fetch('./neighbors.json');
     const data = (await response.json()).countries;
     var endpoints = pickRandom(data);
@@ -70,10 +97,6 @@ async function addCountry() {
 
     const displayData = await d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
     var displayed = displayCountry(displayData.features, countryID.value, "#e8cfae");
-    if(!displayed) {
-        alert("Unknown country name: " + countryID.value);
-        return;
-    }
     
     const checkWin = (displayedCountry) => Array.isArray(displayedCountry) ? displayedCountry.some(checkWin): displayedNames.includes(displayedCountry);
 
@@ -81,17 +104,19 @@ async function addCountry() {
         alert("You win!");
     }
 
-    if(document.getElementById('past-guesses-list').innerHTML == '') document.getElementById('past-guesses-list').innerHTML = countryID.value;
-    else document.getElementById('past-guesses-list').innerHTML = document.getElementById('past-guesses-list').innerHTML + ", " + countryID.value;
+    if(displayed) {
+        if(document.getElementById('past-guesses-list').innerHTML == '') document.getElementById('past-guesses-list').innerHTML = countryID.value;
+        else document.getElementById('past-guesses-list').innerHTML = document.getElementById('past-guesses-list').innerHTML + countryID.value;
 
-    var found = false;
-    path.forEach((country) => {
-        if(country == countryID.value) {
-            document.getElementById('past-guesses-list').innerHTML = document.getElementById('past-guesses-list').innerHTML + " 🟩";
-            found = true;
-        }
-    });
-    if(!found) document.getElementById('past-guesses-list').innerHTML = document.getElementById('past-guesses-list').innerHTML + " 🟥";
+        var found = false;
+        path.forEach((country) => {
+            if(country == countryID.value) {
+                document.getElementById('past-guesses-list').innerHTML = document.getElementById('past-guesses-list').innerHTML + " 🟩" + "<br>";
+                found = true;
+            }
+        });
+        if(!found) document.getElementById('past-guesses-list').innerHTML = document.getElementById('past-guesses-list').innerHTML + " 🟥" + "<br>";
+    }
 }
 
 function pickRandom(countries) {
@@ -106,12 +131,14 @@ function pickRandom(countries) {
 // Add given country to the svg by filtering for selected country
 function displayCountry(data, countryName, color) {
     var newCountry = data.find(country => country.properties.name === countryName)
-    if(newCountry === undefined) return false;
+    if(newCountry === undefined) {
+        alert("Unknown country name: " + countryName);
+        return false;
+    }
 
-    const svgCoordinates = [];
     if(displayedNames.includes(countryName)) {
         alert("Country already guessed: " + countryName);
-        return true;
+        return false;
     }
 
     svg.append("g")
@@ -125,6 +152,7 @@ function displayCountry(data, countryName, color) {
         .attr("stroke-width", "0.3"); 
 
     // Convert coordinates to corresponding values on the SVG
+    const svgCoordinates = [];
     const coordinates = newCountry.geometry.coordinates;
     coordinates.forEach((coords) => {
         coords.forEach((coords2) => {
@@ -140,41 +168,70 @@ function displayCountry(data, countryName, color) {
     displayedCoords.push(svgCoordinates);
     displayedNames.push(countryName); 
 
-    // Translate the display to center on the currently displayed countries
-    const bounds = calculateBounds(displayedCoords);
-    const center = [(bounds[0][0] + bounds[1][0]) / 2, (bounds[0][1] + bounds[1][1]) / 2];
-    svg.transition().call(zoom.transform, d3.zoomIdentity.translate(width / 2 - center[0], height / 2 - center[1]).scale(1));
+    adjustDisplay(calculateBounds(displayedCoords), 20);
 
     return true;
 }
 
-function normalizeLatitude(latitude) {
-    const maxLatitude = 50;
+// Translate and re-adjust zoom to center on currently displayed countries
+function adjustDisplay(bounds, paddingPercentage) {
+    // Find midpoint of map area defined
+    const center = [(bounds[0][0] + bounds[1][0]) / 2, (bounds[0][1] + bounds[1][1]) / 2];
+    const zoomMidX = center[0];
+    const zoomMidY = center[1];
+    
+    // Find size of current map area
+    const minXY = bounds[0];
+    const maxXY = bounds[1];
+    var zoomWidth = Math.abs(minXY[0] - maxXY[0]);
+    var zoomHeight = Math.abs(minXY[1] - maxXY[1]);
+    
+    // Increase map area to include padding
+    zoomWidth = zoomWidth * (1 + paddingPercentage / 100);
+    zoomHeight = zoomHeight * (1 + paddingPercentage / 100);
 
-    if (latitude > maxLatitude) {
-        return maxLatitude;
-    } else if (latitude < -maxLatitude) {
-        return -maxLatitude;
-    } else {
-        return latitude;
-    }
-}
+    // Find scale required for area to fill svg
+    const maxXscale = width / zoomWidth;
+    const maxYscale = height / zoomHeight;
+    var zoomScale = Math.min(maxXscale, maxYscale);
 
-// Calculate an estimate of the max and min currently displayed coordinates to re-center display
+    // Limit to max zoom (handles tiny countries) and min zoom (handles large countries)
+    zoomScale = Math.min(zoomScale, maxZoom);
+    zoomScale = Math.max(zoomScale, minZoom);
+
+    // Find screen pixel equivalent once scaled
+    const offsetX = zoomScale * zoomMidX;
+    const offsetY = zoomScale * zoomMidY;
+
+    // Find the amount to translate to re-center
+    var translateHorizontal = Math.min(0, width / 2 - offsetX);
+    var translateVertical = Math.min(0, height / 2 - offsetY);
+    translateHorizontal = Math.max(width - width * zoomScale, translateHorizontal);
+    translateVertical = Math.max(height - height * zoomScale, translateVertical);
+    
+    svg.transition()
+        .duration(500)
+        .call(
+            zoom.transform, 
+            d3.zoomIdentity.translate(translateHorizontal, translateVertical).scale(zoomScale)
+        );
+  }
+
+// Calculate an estimate of the max and min currently displayed coordinates
 function calculateBounds(displayedCoords) {
     let minX = Number.MAX_VALUE,
         minY = Number.MAX_VALUE,
         maxX = Number.MIN_VALUE,
         maxY = Number.MIN_VALUE;
 
-    
     displayedCoords.forEach((coords) => {
-        minX = Math.min(minX, coords[0][0]);
-        minY = Math.min(minY, coords[0][1]);
-        maxX = Math.max(maxX, coords[0][0]);
-        maxY = Math.max(maxY, coords[0][1]);
+        coords.forEach((coords2) => {
+            if(coords2[0] < minX) minX = coords2[0];
+            if(coords2[1] < minY) minY = coords2[1];
+            if(coords2[0] > maxX) maxX = coords2[0];
+            if(coords2[1] > maxY) maxY = coords2[1];
+        });
     });
-    //console.log([[minX, minY], [maxX, maxY]]);
 
     return [[minX, minY], [maxX, maxY]];
 }
@@ -244,7 +301,10 @@ function findAlternatePaths(countries) {
 // Clear current display and select two new countries to play again
 async function restart() {
     svg.selectAll("path").remove();
-    displayedNames, displayedCoords, path = [];
+    displayedNames = [];
+    displayedCoords = [];
+    path = [];
+    displayMapLines();
     var response = await fetch('./neighbors.json');
     const data = (await response.json()).countries;
     var endpoints = pickRandom(data);
@@ -263,29 +323,6 @@ async function restart() {
     displayCountry(displayData.features, endpoints[1], "#95cade");
     document.getElementById('title').innerHTML = "Today I'd like to go from " + endpoints[0] + " to " + endpoints[1];
 }   
-
-// Create zoom behavior function
-const padding = 200;
-const zoom = d3.zoom()
-    .scaleExtent([0.8, 6])
-    .translateExtent([[-padding, -padding*1.5], [width + padding, height + padding*1.5]])
-    .on("zoom", zoomed);
-
-// Called when there is a zoom event like scrolling or button clicks
-function zoomed(e) {
-    d3.selectAll("path")
-        .attr("transform", e.transform);
-}
-
-d3.select("svg").call(zoom);
-
-function handleButtonZoom(scaleFactor) {
-    if(scaleFactor == 0) {
-        svg.transition().call(zoom.transform, d3.zoomIdentity);
-        return;
-    }
-    svg.transition().call(zoom.scaleBy, scaleFactor);
-}
 
 // Autocomplete function for user input
 // inp is the id of a text field element

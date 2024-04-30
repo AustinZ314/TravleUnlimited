@@ -2450,9 +2450,7 @@
     },
     {
         "id": "Trinidad and Tobago",
-        "neighbors": [
-            "Venezuela"
-        ],
+        "neighbors": [],
         "bb": [
             210.51852416992188,
             375.69598388671875,
@@ -2610,8 +2608,7 @@
         "neighbors": [
             "Brazil",
             "Colombia",
-            "Guyana",
-            "Trinidad and Tobago"
+            "Guyana"
         ],
         "bb": [
             176.8742218017578,
