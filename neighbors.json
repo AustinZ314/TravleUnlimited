@@ -1820,6 +1820,7 @@
         "id": "Norway",
         "neighbors": [
             "Finland",
+            "Russia",
             "Sweden"
         ],
         "bb": [
@@ -2057,6 +2058,7 @@
             "Lithuania",
             "Latvia",
             "Mongolia",
+            "Norway",
             "Poland",
             "North Korea",
             "Ukraine"

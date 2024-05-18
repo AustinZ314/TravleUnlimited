@@ -10,9 +10,6 @@ const projection = d3.geoMercator()
     .scale(width / 1.5 / Math.PI)
     .translate([width / 2, height / 2]);
 
-const minZoom = 0.8;
-const maxZoom = 6;
-
 function displayMapLines() {
     // Define path generator for displaying parallels and meridians
     var path = d3.geoPath()
@@ -45,14 +42,14 @@ function displayMapLines() {
 }
 
 // Create zoom behavior function
-const padding = 200;
+const padding = 500;
 const zoom = d3.zoom()
-    .scaleExtent([0.8, 6])
+    .scaleExtent([0.4, 20])
     .translateExtent([[-padding, -padding*1.5], [width + padding, height + padding*1.5]])
-    .on("zoom", changeZoom);
+    .on("zoom", zoomed);
 
 // Called when there is a zoom event like scrolling or button clicks
-function changeZoom(e) {
+function zoomed(e) {
     d3.selectAll("path")
         .attr("transform", e.transform);
 }
@@ -60,14 +57,18 @@ function changeZoom(e) {
 d3.select("svg")
     .call(zoom);
 
-function handleButtonZoom(scaleFactor) {
+function handleZoom(scaleFactor) {
+    // manualZoom = true; // Prevent viewBox from adjusting since user manually zoomed
     svg.transition()
         .call(zoom.scaleBy, scaleFactor);
 }
 
+// GLOBAL VARIABLES
 var displayedNames = []; // List of currently displayed countries' names
 var displayedCoords = [] // List of currently displayed countries' coordinates
 var path = []; // Shortest path between source and target countries
+// var manualZoom = false; // If user manually zooms, then do not re-center when displaying new countries
+var duration = 750; // Set zoom and function timeout duration
 
 // Select and display source and target countries on load
 document.addEventListener('DOMContentLoaded', async function() {
@@ -79,10 +80,13 @@ document.addEventListener('DOMContentLoaded', async function() {
     
     path = findShortestPath(data, endpoints[0], endpoints[1]);
     path = findAlternatePaths(data);
+
+    // Find new countries for source and target if too close (less than 2 countries in between)
     while(path.length <= 3) {
         endpoints = pickRandom(data);
         console.log(endpoints);
         path = findShortestPath(data, endpoints[0], endpoints[1]);
+        path = findAlternatePaths(data);
     }
     console.log(path);
 
@@ -141,15 +145,7 @@ function displayCountry(data, countryName, color) {
         return false;
     }
 
-    svg.append("g")
-        .selectAll("path")
-        .data([newCountry])
-        .join("path")
-        .attr("fill", color)
-        .attr("d", d3.geoPath()
-            .projection(projection))
-        .attr("stroke", "black")
-        .attr("stroke-width", "0.3"); 
+    addCountryToSVG(newCountry, color); // Display country if already in viewBox
 
     // Convert coordinates to corresponding values on the SVG
     const svgCoordinates = [];
@@ -166,20 +162,40 @@ function displayCountry(data, countryName, color) {
         });
     });
     displayedCoords.push(svgCoordinates);
-    displayedNames.push(countryName); 
+    displayedNames.push(countryName);
 
-    adjustDisplay(calculateBounds(displayedCoords), 20);
+    // manualZoom prevents country from displaying correctly if country is outside of viewBox
+    // Will attempt to display country in original position on SVG without considering adjusted viewBox
+    // if(!manualZoom && displayedNames.length > 1) adjustDisplay(calculateBounds(displayedCoords), 30);
+    if(displayedNames.length > 1) adjustDisplay(calculateBounds(displayedCoords), 30);
+
+    // Re-display country after zoom if it was outside of viewBox
+    setTimeout(function() { 
+        addCountryToSVG(newCountry, color);
+    }, duration * .58);
 
     return true;
 }
 
-// Translate and re-adjust zoom to center on currently displayed countries
+// Add country's coordinates to the path
+function addCountryToSVG(country, color) {
+    svg.append("g")
+        .selectAll("path")
+        .data([country])
+        .join("path")
+        .attr("fill", color)
+        .attr("d", d3.geoPath()
+            .projection(projection))
+        .attr("stroke", "black")
+        .attr("stroke-width", "0.3"); 
+}
+
+// Translate and zoom to center on currently displayed countries
 function adjustDisplay(bounds, paddingPercentage) {
     // Find midpoint of map area defined
-    const center = [(bounds[0][0] + bounds[1][0]) / 2, (bounds[0][1] + bounds[1][1]) / 2];
-    const zoomMidX = center[0];
-    const zoomMidY = center[1];
-    
+    const zoomMidX = (bounds[0][0] + bounds[1][0]) / 2;
+    const zoomMidY = (bounds[0][1] + bounds[1][1]) / 2;
+
     // Find size of current map area
     const minXY = bounds[0];
     const maxXY = bounds[1];
@@ -195,29 +211,25 @@ function adjustDisplay(bounds, paddingPercentage) {
     const maxYscale = height / zoomHeight;
     var zoomScale = Math.min(maxXscale, maxYscale);
 
-    // Limit to max zoom (handles tiny countries) and min zoom (handles large countries)
-    zoomScale = Math.min(zoomScale, maxZoom);
-    zoomScale = Math.max(zoomScale, minZoom);
-
     // Find screen pixel equivalent once scaled
     const offsetX = zoomScale * zoomMidX;
     const offsetY = zoomScale * zoomMidY;
 
     // Find the amount to translate to re-center
-    var translateHorizontal = Math.min(0, width / 2 - offsetX);
-    var translateVertical = Math.min(0, height / 2 - offsetY);
-    translateHorizontal = Math.max(width - width * zoomScale, translateHorizontal);
-    translateVertical = Math.max(height - height * zoomScale, translateVertical);
+    var translateHorizontal = width / 2 - offsetX;
+    var translateVertical = height / 2 - offsetY;
     
     svg.transition()
-        .duration(500)
+        .duration(duration)
         .call(
             zoom.transform, 
             d3.zoomIdentity.translate(translateHorizontal, translateVertical).scale(zoomScale)
         );
+
+    // manualZoom = false; // Set manualZoom to false if user clicks 'Reset Zoom' button
   }
 
-// Calculate an estimate of the max and min currently displayed coordinates
+// Calculate the max and min currently displayed coordinates
 function calculateBounds(displayedCoords) {
     let minX = Number.MAX_VALUE,
         minY = Number.MAX_VALUE,
@@ -279,6 +291,7 @@ function findShortestPath(countries, source, target) {
     if(result.length === 1) {
         return [];
     }
+
     return result;
 }
 
@@ -300,11 +313,14 @@ function findAlternatePaths(countries) {
 
 // Clear current display and select two new countries to play again
 async function restart() {
+    // Remove currently displayed countries from the path and add back parallels and meridians
     svg.selectAll("path").remove();
     displayedNames = [];
     displayedCoords = [];
     path = [];
     displayMapLines();
+
+    // Pick new source and target countries
     var response = await fetch('./neighbors.json');
     const data = (await response.json()).countries;
     var endpoints = pickRandom(data);
