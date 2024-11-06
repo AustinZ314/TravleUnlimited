@@ -9,32 +9,57 @@
     <!-- Load d3.js -->
     <script src="https://d3js.org/d3.v6.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+    <div class="overlay"></div>
+    <div class="info-icon" onclick="toggleTutorial()">ⓘ</div>
+    <div id="tutorial-tab" class="info-tab">
+        <button id="close-tutorial" class="close">&times;</button>
+        <p>How to Play</p> <br>
+        <p>🌍 Guess countries to get from the <span class="start-country">Starting Country</span> to the <span class="end-country">End Country</span></p> <br>
+        <p>⚡ Get there with the least possible countries</p> <br>
+        <p>❗ Be careful! Don't go over the guessing limit</p> <br>
+        <p>🤩 Good Luck!</p>
+    </div>
+
+    <div id="gameover-tab" class="info-tab">
+        <button id="close-gameover" class="close">&times;</button>
+        <h2 id="gameover-title">Game Over</h2> <br>
+        <h3 id="gameover-body"></h2> <br>
+        <p id="answer"></p>
+    </div>
+    
     <!-- Create an element where the map will take place -->
     <div id="main-display-container">
-        <p id="title" style="color:white"></p>
-        <svg id="map" width="600" height="400"></svg>
+        <div id="past-guesses-container">
+            <h3 id="past-guesses-title">Past guesses:</h3>
+            <p id="past-guesses-list"></p>
+        </div>
+
+        <div id="center-display-container">
+            <p id="title" style="color:white"></p>
+            <svg id="map" width="600" height="400"></svg>
+
+            <form autocomplete="off" action="" onsubmit="return false;">
+                <div class="autocomplete">
+                    <input id="user-input" type="text" placeholder="Enter a country...">
+                </div>
+                <button id="guess-button" onclick="addCountry()"></button>
+            </form>
+            <br>
+            <p id="input-error" style="color: #d9534f; display: none;"></p>
+        </div>
+
         <div id="button-container">
             <button class="side-button" id="zoom-in" onclick="handleZoom(1.5)">+</button>
             <button class="side-button" id="zoom-out" onclick="handleZoom(0.5)">-</button>
             <button class="side-button" id="reset-zoom" onclick="adjustDisplay(calculateBounds(displayedCoords), 20)">Reset Zoom</button>
-            <button class="side-button" id="restart-button" onclick="restart()">Restart</button>
+            <button class="side-button" id="restart-button" onclick="restart()">New Game</button>
         </div>
-
-        <div id="past-guesses-container">
-            <h3 id="past-guesses-title" style="color:white">Past guesses: </h3>
-            <p id="past-guesses-list" style="color:white"></p>
-        </div>
-
-        <form autocomplete="off" action="" onsubmit="return false;">
-            <div class="autocomplete" style="width:300px;">
-                <input id="user-input" type="text" placeholder="Enter a country...">
-            </div>
-            <button id="guess-button" onclick="addCountry()">Guess</button>
-        </form>
     </div>
     <br>
 

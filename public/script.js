@@ -1,4 +1,4 @@
-var countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Central Arfrican Republic","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cuba","Curacao","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauro","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","North Korea","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre &amp; Miquelon","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","St Kitts &amp; Nevis","St Lucia","St Vincent","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad &amp; Tobago","Tunisia","Turkey","Turkmenistan","Turks &amp; Caicos","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
+var countries = ["Afghanistan","Angola","Albania","United Arab Emirates","Argentina","Armenia","Antarctica","French Southern and Antarctic Lands","Australia","Austria","Azerbaijan","Burundi","Belgium","Benin","Burkina Faso","Bangladesh","Bulgaria","The Bahamas","Bosnia and Herzegovina","Belarus","Belize","Bolivia","Brazil","Brunei","Bhutan","Botswana","Central African Republic","Canada","Switzerland","Chile","China","Ivory Coast","Cameroon","Democratic Republic of the Congo","Republic of the Congo","Colombia","Costa Rica","Cuba","Northern Cyprus","Cyprus","Czech Republic","Germany","Djibouti","Denmark","Dominican Republic","Algeria","Ecuador","Egypt","Eritrea","Spain","Estonia","Ethiopia","Finland","Fiji","Falkland Islands","France","Gabon","England","Georgia","Ghana","Guinea","Gambia","Guinea Bissau","Equatorial Guinea","Greece","Greenland","Guatemala","Guyana","Honduras","Croatia","Haiti","Hungary","Indonesia","India","Ireland","Iran","Iraq","Iceland","Israel","Italy","Jamaica","Jordan","Japan","Kazakhstan","Kenya","Kyrgyzstan","Cambodia","South Korea","Kosovo","Kuwait","Laos","Lebanon","Liberia","Libya","Sri Lanka","Lesotho","Lithuania","Luxembourg","Latvia","Morocco","Moldova","Madagascar","Mexico","Macedonia","Mali","Myanmar","Montenegro","Mongolia","Mozambique","Mauritania","Malawi","Malaysia","Namibia","New Caledonia","Niger","Nigeria","Nicaragua","Netherlands","Norway","Nepal","New Zealand","Oman","Pakistan","Panama","Peru","Philippines","Papua New Guinea","Poland","Puerto Rico","North Korea","Portugal","Paraguay","Qatar","Romania","Russia","Rwanda","Western Sahara","Saudi Arabia","Sudan","South Sudan","Senegal","Solomon Islands","Sierra Leone","El Salvador","Somaliland","Somalia","Republic of Serbia","Suriname","Slovakia","Slovenia","Sweden","Swaziland","Syria","Chad","Togo","Thailand","Tajikistan","Turkmenistan","East Timor","Trinidad and Tobago","Tunisia","Turkey","Taiwan","United Republic of Tanzania","Uganda","Ukraine","Uruguay","USA","Uzbekistan","Venezuela","Vietnam","Vanuatu","West Bank","Yemen","South Africa","Zambia","Zimbabwe"];
 
 // The svg
 const svg = d3.select("svg"),
@@ -63,63 +63,196 @@ function handleZoom(scaleFactor) {
         .call(zoom.scaleBy, scaleFactor);
 }
 
+
 // GLOBAL VARIABLES
-var displayedNames = []; // List of currently displayed countries' names
-var displayedCoords = [] // List of currently displayed countries' coordinates
-var path = []; // Shortest path between source and target countries
-// var manualZoom = false; // If user manually zooms, then do not re-center when displaying new countries
-var duration = 750; // Set zoom and function timeout duration
+var displayedNames = [];    // List of currently displayed countries' names
+var displayedCoords = []    // List of currently displayed countries' coordinates
+var path = [];              // Shortest path between source and target countries
+// var manualZoom = false;  // If user manually zooms, then do not re-center when displaying new countries
+var duration = 750;         // Set zoom and function timeout duration
+var guesses = 0;            // How many guesses the player has used
+var maxGuesses = 0;         // Total guesses allowed before player loses
 
 // Select and display source and target countries on load
 document.addEventListener('DOMContentLoaded', async function() {
+
     displayMapLines();
     var response = await fetch('./neighbors.json');
     const data = (await response.json()).countries;
     var endpoints = pickRandom(data);
-    console.log(endpoints);
-    
+    //console.log(endpoints);
+
+    endpoints[0] = "Democratic Republic of the Congo";
+    endpoints[1] = "Nigeria";
+
     path = findShortestPath(data, endpoints[0], endpoints[1]);
     path = findAlternatePaths(data);
 
     // Find new countries for source and target if too close (less than 2 countries in between)
     while(path.length <= 3) {
         endpoints = pickRandom(data);
-        console.log(endpoints);
+        //console.log(endpoints);
         path = findShortestPath(data, endpoints[0], endpoints[1]);
         path = findAlternatePaths(data);
     }
-    console.log(path);
+    //console.log(path);
+    maxGuesses = Math.floor((path.length - 2) * 1.5 + 2);
 
     const displayData = await d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
-    displayCountry(displayData.features, endpoints[0], "#f5bac8");
-    displayCountry(displayData.features, endpoints[1], "#95cade");
-    document.getElementById('title').innerHTML = "Today I'd like to go from " + endpoints[0] + " to " + endpoints[1];
+    displayCountry(displayData.features, endpoints[0], "#f5bac8", false);
+    displayCountry(displayData.features, endpoints[1], "#95cade", false);
+    document.getElementById('title').innerHTML = `Today, I want to go from <span class="start-country">${endpoints[0]}</span> to <span class="end-country">${endpoints[1]}</span>.`;
+    document.getElementById('guess-button').innerHTML = "Guess (0/" + maxGuesses + ")";
+
+    // Display tutorial
+    setTimeout(() => {
+        dispTutorial();
+    }, 300);
 })
+
+document.getElementById("close-tutorial").addEventListener("click", hideTutorial);
+document.getElementById("close-gameover").addEventListener("click", hideGameover);
+
+function toggleTutorial() {
+    const tut = document.getElementById("tutorial-tab");
+    if (tut.style.display === "none" || tut.style.opacity === "0") {
+        dispTutorial();
+    } else {
+        hideTutorial();
+    }
+}
+
+function dispTutorial() {
+    const tut = document.getElementById("tutorial-tab");
+    const overlay = document.querySelector(".overlay");
+
+    tut.style.display = "block";
+    overlay.style.display = "block";
+    setTimeout(() => {
+        tut.style.opacity = "1";
+        overlay.style.opacity = "1";
+        tut.style.transform = "translate(-50%, -50%)";
+    }, 0)
+}
+
+function hideTutorial() {
+    const tut = document.getElementById("tutorial-tab");
+    const overlay = document.querySelector(".overlay");
+
+    tut.style.opacity = "0";
+    overlay.style.opacity = "0";
+    setTimeout(() => {
+        tut.style.display = "none";
+        overlay.style.display = "none";
+    }, 300);
+}
+
+function dispGameover() {
+    const gameover = document.getElementById("gameover-tab");
+    const overlay = document.querySelector(".overlay");
+
+    gameover.style.display = "block";
+    overlay.style.display = "block";
+    setTimeout(() => {
+        gameover.style.opacity = "1";
+        overlay.style.opacity = "1";
+        gameover.style.transform = "translate(-50%, -50%)";
+    }, 0);
+}
+
+function hideGameover() {
+    const gameover = document.getElementById("gameover-tab");
+    const overlay = document.querySelector(".overlay");
+
+    gameover.style.opacity = "0";
+    overlay.style.opacity = "0";
+    setTimeout(() => {
+        gameover.style.display = "none";
+        overlay.style.display = "none";
+    }, 300);
+}
 
 async function addCountry() {
     var countryID = document.querySelector("#user-input");
+    const pastGuesses = document.getElementById('past-guesses-list');
+    const guessButton = document.getElementById('guess-button');
+    const answer = document.getElementById('answer');
 
     const displayData = await d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
-    var displayed = displayCountry(displayData.features, countryID.value, "#e8cfae");
-    
+
+    var inPath = checkItemInPath(path, countryID.value);
+    var displayed = false;
+    if(inPath) displayed = displayCountry(displayData.features, countryID.value, "#e8cfae", false);
+    else displayed = displayCountry(displayData.features, countryID.value, "#a9a59d", false);
+
     const checkWin = (displayedCountry) => Array.isArray(displayedCountry) ? displayedCountry.some(checkWin): displayedNames.includes(displayedCountry);
 
-    if(path.every(checkWin)) {
-        alert("You win!");
+    if(displayed) {
+        if(pastGuesses.innerHTML == '') pastGuesses.innerHTML = countryID.value;
+        else pastGuesses.innerHTML = pastGuesses.innerHTML + countryID.value;
+
+        if(inPath) pastGuesses.innerHTML = pastGuesses.innerHTML + " 🟩" + "<br>";
+        else pastGuesses.innerHTML = pastGuesses.innerHTML + " 🟥" + "<br>";
+    } else {
+        document.getElementById('user-input').value = '';
+        return;
     }
 
-    if(displayed) {
-        if(document.getElementById('past-guesses-list').innerHTML == '') document.getElementById('past-guesses-list').innerHTML = countryID.value;
-        else document.getElementById('past-guesses-list').innerHTML = document.getElementById('past-guesses-list').innerHTML + countryID.value;
+    guesses++;
+    guessButton.innerHTML = "Guess (" + guesses + "/" + maxGuesses + ")";
 
-        var found = false;
-        path.forEach((country) => {
-            if(country == countryID.value) {
-                document.getElementById('past-guesses-list').innerHTML = document.getElementById('past-guesses-list').innerHTML + " 🟩" + "<br>";
-                found = true;
-            }
+    if(path.every(checkWin)) {
+        document.getElementById('gameover-title').innerHTML = "Congratulations!";
+        document.getElementById('gameover-body').innerHTML = "You won! 🎉";
+        answer.innerHTML = "";
+        dispGameover();
+
+        confetti({
+            spread: 360,
+            particleCount: 100,
+            origin: { x: 0.5, y: 0.5 },
+            colors: ['#ff0000', '#00ff00', '#0000ff', '#ff0', '#ff00ff'],
         });
-        if(!found) document.getElementById('past-guesses-list').innerHTML = document.getElementById('past-guesses-list').innerHTML + " 🟥" + "<br>";
+
+        guessButton.disabled = true;
+        guessButton.backgroundColor = '#cccccc';
+    } else if(guesses >= maxGuesses) {
+        document.getElementById('gameover-title').innerHTML = "Game Over!";
+        document.getElementById('gameover-body').innerHTML = "You lost :(";
+        answer.innerHTML = "Shortest Path:";
+        path.splice(0, 1);
+        path.splice(path.length - 1, 1);
+        displayPath(path, answer, displayData.features, 0, false);
+        dispGameover();
+        guessButton.disabled = true;
+        guessButton.backgroundColor = '#cccccc';
+    }
+}
+
+// Check path recursively to account for alternative paths
+function checkItemInPath(pathItem, inputCountry) {
+    for(let country of pathItem) {
+        if(Array.isArray(country)) {
+            if(checkItemInPath(country, inputCountry)) {
+                return true;
+            }
+        } else if(country == inputCountry){
+            return true;
+        }
+    }
+    return false;
+}
+
+function displayPath(pathItem, answer, data, count, recall) {
+    for(let country of pathItem) {
+        if(Array.isArray(country)) {
+            displayPath(country, answer, data, 0, true);
+        } else {
+            if(count >= 1 && recall) break;
+            answer.innerHTML = answer.innerHTML + "<br> > " + country;
+            displayCountry(data, country, "#e8cfae", true);
+            count++;
+        }
     }
 }
 
@@ -133,16 +266,33 @@ function pickRandom(countries) {
 }
 
 // Add given country to the svg by filtering for selected country
-function displayCountry(data, countryName, color) {
-    var newCountry = data.find(country => country.properties.name === countryName)
-    if(newCountry === undefined) {
-        alert("Unknown country name: " + countryName);
-        return false;
-    }
+function displayCountry(data, countryName, color, gameEnd) {
+    var newCountry = data.find(country => country.properties.name === countryName);
+    const error = document.getElementById('input-error');
 
-    if(displayedNames.includes(countryName)) {
-        alert("Country already guessed: " + countryName);
-        return false;
+    if(!gameEnd) {
+        if(newCountry === undefined) {
+            //alert("Unknown country name: " + countryName);
+            error.innerHTML = "Unknown country name: " + countryName;
+            error.style.display = "block";
+
+            setTimeout(() => {
+                error.style.display = "none";
+            }, 2000);
+            return false;
+        }
+
+        if(displayedNames.includes(countryName)) {
+            //alert("Country already guessed: " + countryName);
+            error.innerHTML = "Country already guessed: " + countryName;
+
+            error.style.display = "block";
+
+            setTimeout(() => {
+                error.style.display = "none";
+            }, 2000);
+            return false;
+        }
     }
 
     addCountryToSVG(newCountry, color); // Display country if already in viewBox
@@ -187,7 +337,7 @@ function addCountryToSVG(country, color) {
         .attr("d", d3.geoPath()
             .projection(projection))
         .attr("stroke", "black")
-        .attr("stroke-width", "0.3"); 
+        .attr("stroke-width", "0.3")
 }
 
 // Translate and zoom to center on currently displayed countries
@@ -313,32 +463,47 @@ function findAlternatePaths(countries) {
 
 // Clear current display and select two new countries to play again
 async function restart() {
+    const guessButton = document.getElementById('guess-button');
+    const restartButton = document.getElementById('restart-button');
+    restartButton.disabled = true;
+
     // Remove currently displayed countries from the path and add back parallels and meridians
     svg.selectAll("path").remove();
     displayedNames = [];
     displayedCoords = [];
     path = [];
     displayMapLines();
+    document.getElementById('past-guesses-list').innerHTML = "";
 
     // Pick new source and target countries
     var response = await fetch('./neighbors.json');
     const data = (await response.json()).countries;
     var endpoints = pickRandom(data);
-    console.log(endpoints);
+    //console.log(endpoints);
     
     path = findShortestPath(data, endpoints[0], endpoints[1]);
     path = findAlternatePaths(data);
     while(path.length <= 3) {
         endpoints = pickRandom(data);
-        console.log(endpoints);
+        //console.log(endpoints);
         path = findShortestPath(data, endpoints[0], endpoints[1]);
     }
-    console.log(path);
+    //console.log(path);
+
+    guesses = 0;
+    maxGuesses = Math.floor((path.length - 2) * 1.5 + 2);
     const displayData = await d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson");
-    displayCountry(displayData.features, endpoints[0], "#f5bac8");
-    displayCountry(displayData.features, endpoints[1], "#95cade");
-    document.getElementById('title').innerHTML = "Today I'd like to go from " + endpoints[0] + " to " + endpoints[1];
-}   
+    displayCountry(displayData.features, endpoints[0], "#f5bac8", false);
+    displayCountry(displayData.features, endpoints[1], "#95cade", false);
+    document.getElementById('title').innerHTML = `Today, I want to go from <span class="start-country">${endpoints[0]}</span> to <span class="end-country">${endpoints[1]}</span>.`;
+    guessButton.innerHTML = "Guess (0/" + maxGuesses + ")";
+    guessButton.disabled = false;
+    document.getElementById('user-input').value = '';
+
+    setTimeout(() => {
+        restartButton.disabled = false;
+    }, 500);
+}
 
 // Autocomplete function for user input
 // inp is the id of a text field element
@@ -348,18 +513,22 @@ function autocomplete(inp, arr) {
     inp.addEventListener("input", function(e) {
         var div1, div2, val = this.value;
         closeAllLists();
-        if (!val) { return false;}
+        if(!val) { return false;}
         currentFocus = -1;
         div1 = document.createElement("DIV");
         div1.setAttribute("id", this.id + "autocomplete-list");
         div1.setAttribute("class", "autocomplete-items");
         this.parentNode.appendChild(div1);
 
-        for (let i = 0; i < arr.length; i++) {
-            if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+        for(let i = 0; i < arr.length; i++) {
+            let matchIndex = arr[i].toUpperCase().indexOf(val.toUpperCase());
+            if(matchIndex > -1) {
                 div2 = document.createElement("DIV");
-                div2.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-                div2.innerHTML += arr[i].substr(val.length);
+
+                div2.innerHTML = arr[i].substring(0, matchIndex);
+                div2.innerHTML += "<strong>" + arr[i].substring(matchIndex, matchIndex + val.length) + "</strong>";
+                div2.innerHTML += arr[i].substring(matchIndex + val.length);
+
                 div2.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
                 div2.addEventListener("click", function(e) {
                     inp.value = this.getElementsByTagName("input")[0].value;
@@ -372,39 +541,39 @@ function autocomplete(inp, arr) {
 
     inp.addEventListener("keydown", function(e) {
         var x = document.getElementById(this.id + "autocomplete-list");
-        if (x) x = x.getElementsByTagName("div");
-        if (e.keyCode == 40) {
+        if(x) x = x.getElementsByTagName("div");
+        if(e.keyCode == 40) {
             currentFocus++;
             addActive(x);
-        } else if (e.keyCode == 38) {
+        } else if(e.keyCode == 38) {
             currentFocus--;
             addActive(x);
-        } else if (e.keyCode == 13) {
+        } else if(e.keyCode == 13) {
             e.preventDefault();
-            if (currentFocus > -1) {
-                if (x) x[currentFocus].click();
+            if(currentFocus > -1) {
+                if(x) x[currentFocus].click();
             }
         }
     });
 
     function addActive(x) {
-        if (!x) return false;
+        if(!x) return false;
         removeActive(x);
-        if (currentFocus >= x.length) currentFocus = 0;
-        if (currentFocus < 0) currentFocus = (x.length - 1);
+        if(currentFocus >= x.length) currentFocus = 0;
+        if(currentFocus < 0) currentFocus = (x.length - 1);
         x[currentFocus].classList.add("autocomplete-active");
     }
 
     function removeActive(x) {
-        for (var i = 0; i < x.length; i++) {
+        for(var i = 0; i < x.length; i++) {
             x[i].classList.remove("autocomplete-active");
         }
     }
 
     function closeAllLists(elmnt) {
         var x = document.getElementsByClassName("autocomplete-items");
-        for (var i = 0; i < x.length; i++) {
-            if (elmnt != x[i] && elmnt != inp) {
+        for(var i = 0; i < x.length; i++) {
+            if(elmnt != x[i] && elmnt != inp) {
                 x[i].parentNode.removeChild(x[i]);
             }
         }
