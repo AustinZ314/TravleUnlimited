@@ -82,9 +82,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     var endpoints = pickRandom(data);
     //console.log(endpoints);
 
-    endpoints[0] = "Democratic Republic of the Congo";
-    endpoints[1] = "Nigeria";
-
     path = findShortestPath(data, endpoints[0], endpoints[1]);
     path = findAlternatePaths(data);
 
